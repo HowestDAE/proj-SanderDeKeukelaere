@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_TF2ItemList", "Project_TF2ItemList.csproj", "{BCCB1D0A-5CFE-4E28-A3E3-7BE3E9A45878}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCCB1D0A-5CFE-4E28-A3E3-7BE3E9A45878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCCB1D0A-5CFE-4E28-A3E3-7BE3E9A45878}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCCB1D0A-5CFE-4E28-A3E3-7BE3E9A45878}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCCB1D0A-5CFE-4E28-A3E3-7BE3E9A45878}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {773A22CF-7420-435A-B668-D5D1FDE0B5F9}
+	EndGlobalSection
+EndGlobal
