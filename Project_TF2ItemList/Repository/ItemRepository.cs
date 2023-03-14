@@ -47,14 +47,12 @@ namespace Project_TF2ItemList.Repository
                 Item curItem = _items[i];
 
                 // Get all items with the same name as the current item
-                List<Item> doubleItems = _items.FindAll(otherItem => otherItem.ItemName.Equals(curItem.ItemName));
+                List<Item> doubleItems = _items.FindAll(otherItem => otherItem != curItem && otherItem.ItemName.Equals(curItem.ItemName));
 
                 foreach (Item doubleItem in doubleItems)
                 {
-                    if (doubleItem == curItem) continue;
-
                     // Combine the classes list
-                    curItem.Classes.Concat(doubleItem.Classes);
+                    curItem.Classes.AddRange(doubleItem.Classes);
 
                     // Remove the double from the itemlist
                     _items.Remove(doubleItem);
