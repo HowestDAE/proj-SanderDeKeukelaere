@@ -1,0 +1,1101 @@
+{
+		"status": 1,
+		"items_game_url": "http://media.steampowered.com/apps/440/scripts/items/items_game.3fa6d36611c15b3266179ae4c22ce4c8d58645ea.txt",
+		"items": [
+			{
+				"name": "TF_WEAPON_BAT",
+				"defindex": 0,
+				"item_class": "tf_weapon_bat",
+				"item_type_name": "Bat",
+				"item_name": "Bat",
+				"proper_name": false,
+				"item_slot": "melee",
+				"model_player": "models/weapons/c_models/c_bat.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/c_models/c_bat",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/c_bat.50e76c8094493ae96cf10d8df676a93cd13516fc.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/c_bat_large.d036be2350e477ddb30576b41b83a6667c02b08b.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Scout"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_BOTTLE",
+				"defindex": 1,
+				"item_class": "tf_weapon_bottle",
+				"item_type_name": "Bottle",
+				"item_name": "Bottle",
+				"proper_name": false,
+				"item_slot": "melee",
+				"model_player": "models/weapons/c_models/c_bottle/c_bottle.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_bottle",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_bottle.c3a6b7a98ccf6cd5cec84e377a8dcbed8394cdb2.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_bottle_large.44f57cd6e9e8c9782b3510870eb3066d19f81428.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Demoman"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_FIREAXE",
+				"defindex": 2,
+				"item_class": "tf_weapon_fireaxe",
+				"item_type_name": "Fire Axe",
+				"item_name": "Fire Axe",
+				"proper_name": false,
+				"item_slot": "melee",
+				"model_player": "models/weapons/c_models/c_fireaxe_pyro/c_fireaxe_pyro.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/c_models/c_fireaxe_pyro/c_fireaxe_pyro",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/c_fireaxe_pyro.f43835423ab6a5bc277329ec57c84a2d28e4a790.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/c_fireaxe_pyro_large.be78801ed8df7dcd14eb89e0def2724080120519.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Pyro"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_CLUB",
+				"defindex": 3,
+				"item_class": "tf_weapon_club",
+				"item_type_name": "Kukri",
+				"item_name": "Kukri",
+				"proper_name": false,
+				"item_slot": "melee",
+				"model_player": "models/weapons/c_models/c_machete/c_machete.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_machete",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_machete.8dd45ef4de71c685bd57a034205399adf15249c4.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_machete_large.ab9015480c5b4cdfa2a86577758df4eb0c6f560d.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Sniper"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_KNIFE",
+				"defindex": 4,
+				"item_class": "tf_weapon_knife",
+				"item_type_name": "Knife",
+				"item_name": "Knife",
+				"item_description": "Attack an enemy from behind to Backstab them for a one hit kill.",
+				"proper_name": false,
+				"item_slot": "melee",
+				"model_player": "models/weapons/c_models/c_knife/c_knife.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_knife",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_knife.035a611b3f12c162ebc8857beb120fd07382c1d4.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_knife_large.22ba9afe5d2266d3d9af0f7dcf99d67d588cb895.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Spy"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_FISTS",
+				"defindex": 5,
+				"item_class": "tf_weapon_fists",
+				"item_type_name": "Fists",
+				"item_name": "Fists",
+				"proper_name": false,
+				"item_slot": "melee",
+				"model_player": "",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/v_models/v_fist_heavy",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/v_fist_heavy.b3430ff6a4bd7f5e8c89ad5804fe42390cf6a563.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/v_fist_heavy_large.8a1e3c4c1c80ec5288b13873b265e863c20b1387.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"styles": [
+					{
+						"name": "TF_UnknownStyle"
+					}
+				]
+				,
+				"used_by_classes": [
+					"Heavy"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_SHOVEL",
+				"defindex": 6,
+				"item_class": "tf_weapon_shovel",
+				"item_type_name": "Shovel",
+				"item_name": "Shovel",
+				"proper_name": false,
+				"item_slot": "melee",
+				"model_player": "models/weapons/c_models/c_shovel/c_shovel.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_shovel",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_shovel.af4732f0c4d144abfaab15f4caddb975b9055f55.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_shovel_large.e77641eed3c318d8749976679b1e520a1d01a072.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Soldier"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_WRENCH",
+				"defindex": 7,
+				"item_class": "tf_weapon_wrench",
+				"item_type_name": "Wrench",
+				"item_name": "Wrench",
+				"item_description": "Upgrades, repairs and speeds up construction of friendly buildings on hit",
+				"proper_name": false,
+				"item_slot": "melee",
+				"model_player": "models/weapons/c_models/c_wrench/c_wrench.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_wrench",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_wrench.c28ea76829f31aa00e65c524aa66c3486f5e6753.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_wrench_large.07e3fb9b450b873341106920222f087f2dfc7d16.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Engineer"
+				]
+				,
+				"attributes": [
+					{
+						"name": "kill eater score type",
+						"class": "kill_eater_score_type",
+						"value": 3
+					},
+					{
+						"name": "kill eater score type 2",
+						"class": "kill_eater_score_type_2",
+						"value": 0
+					}
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_BONESAW",
+				"defindex": 8,
+				"item_class": "tf_weapon_bonesaw",
+				"item_type_name": "Bonesaw",
+				"item_name": "Bonesaw",
+				"proper_name": false,
+				"item_slot": "melee",
+				"model_player": "models/weapons/c_models/c_bonesaw/c_bonesaw.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/c_models/c_bonesaw/c_bonesaw",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/c_bonesaw.6a7b7e2fee4933e2b5d3cf496f0b9e236265f9bf.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/c_bonesaw_large.aefad61757076f6268be4d15a4a349dfe71ba48a.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Medic"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_SHOTGUN_PRIMARY",
+				"defindex": 9,
+				"item_class": "tf_weapon_shotgun",
+				"item_type_name": "Shotgun",
+				"item_name": "Shotgun",
+				"proper_name": false,
+				"item_slot": "primary",
+				"model_player": "models/weapons/c_models/c_shotgun/c_shotgun.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_shotgun",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_shotgun.781e0a03e8536215731d276a911c5753e42901d4.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_shotgun_large.9d8d23d241e3e1cc543154f2d7f43a850da25e02.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Engineer"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_SHOTGUN_SOLDIER",
+				"defindex": 10,
+				"item_class": "tf_weapon_shotgun",
+				"item_type_name": "Shotgun",
+				"item_name": "Shotgun",
+				"proper_name": false,
+				"item_slot": "secondary",
+				"model_player": "models/weapons/c_models/c_shotgun/c_shotgun.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_shotgun",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_shotgun.781e0a03e8536215731d276a911c5753e42901d4.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_shotgun_large.9d8d23d241e3e1cc543154f2d7f43a850da25e02.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Soldier"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_SHOTGUN_HWG",
+				"defindex": 11,
+				"item_class": "tf_weapon_shotgun",
+				"item_type_name": "Shotgun",
+				"item_name": "Shotgun",
+				"proper_name": false,
+				"item_slot": "secondary",
+				"model_player": "models/weapons/c_models/c_shotgun/c_shotgun.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_shotgun",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_shotgun.781e0a03e8536215731d276a911c5753e42901d4.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_shotgun_large.9d8d23d241e3e1cc543154f2d7f43a850da25e02.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Heavy"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_SHOTGUN_PYRO",
+				"defindex": 12,
+				"item_class": "tf_weapon_shotgun",
+				"item_type_name": "Shotgun",
+				"item_name": "Shotgun",
+				"proper_name": false,
+				"item_slot": "secondary",
+				"model_player": "models/weapons/c_models/c_shotgun/c_shotgun.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_shotgun",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_shotgun.781e0a03e8536215731d276a911c5753e42901d4.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_shotgun_large.9d8d23d241e3e1cc543154f2d7f43a850da25e02.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Pyro"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_SCATTERGUN",
+				"defindex": 13,
+				"item_class": "tf_weapon_scattergun",
+				"item_type_name": "Scattergun",
+				"item_name": "Scattergun",
+				"proper_name": false,
+				"item_slot": "primary",
+				"model_player": "models/weapons/c_models/c_scattergun.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/c_models/c_scattergun",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/c_scattergun.2e6a24f7733c70a7d688626c78c9116950a1e684.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/c_scattergun_large.510a91810888053a646b8889a0ed65024887dfed.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Scout"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_SNIPERRIFLE",
+				"defindex": 14,
+				"item_class": "tf_weapon_sniperrifle",
+				"item_type_name": "Sniper Rifle",
+				"item_name": "Sniper Rifle",
+				"proper_name": false,
+				"item_slot": "primary",
+				"model_player": "models/weapons/c_models/c_sniperrifle/c_sniperrifle.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_sniperrifle",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_sniperrifle.af3c429316a18fddf96dd6af03ab0c220d3cfe09.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_sniperrifle_large.32f175b26906edb5e44d8520b5feafac65ca97c9.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Sniper"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_MINIGUN",
+				"defindex": 15,
+				"item_class": "tf_weapon_minigun",
+				"item_type_name": "Minigun",
+				"item_name": "Minigun",
+				"proper_name": false,
+				"item_slot": "primary",
+				"model_player": "models/weapons/c_models/c_minigun/c_minigun.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_minigun",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_minigun.92362e2a8d60b5dd050c0e85e911ee1499a7b559.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_minigun_large.8d94ccc2c7ea7d375d0398171e573871fc8d2563.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Heavy"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_SMG",
+				"defindex": 16,
+				"item_class": "tf_weapon_smg",
+				"item_type_name": "SMG",
+				"item_name": "SMG",
+				"proper_name": false,
+				"item_slot": "secondary",
+				"model_player": "models/weapons/c_models/c_smg/c_smg.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_smg",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_smg.a3610eb2082b665e0e924f1da14ed3429d789641.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_smg_large.60bdf2356f145300879d891dc3f993b57b817607.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"styles": [
+					{
+						"name": "TF_UnknownStyle"
+					},
+					{
+						"name": "TF_UnknownStyle"
+					}
+				]
+				,
+				"used_by_classes": [
+					"Sniper"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_SYRINGEGUN_MEDIC",
+				"defindex": 17,
+				"item_class": "tf_weapon_syringegun_medic",
+				"item_type_name": "Syringe Gun",
+				"item_name": "Syringe Gun",
+				"proper_name": false,
+				"item_slot": "primary",
+				"model_player": "models/weapons/c_models/c_syringegun/c_syringegun.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_syringegun",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_syringegun.fcd97cf1e4a13de950a94842e3bc0d500b0efe05.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_syringegun_large.e8795f1c2121374bfdd7389674daf3ab0bd84018.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Medic"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_ROCKETLAUNCHER",
+				"defindex": 18,
+				"item_class": "tf_weapon_rocketlauncher",
+				"item_type_name": "Rocket Launcher",
+				"item_name": "Rocket Launcher",
+				"proper_name": false,
+				"item_slot": "primary",
+				"model_player": "models/weapons/c_models/c_rocketlauncher/c_rocketlauncher.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_rocketlauncher",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_rocketlauncher.0d0d3821f600a5065d5fd95dadd5ce56a8b0f802.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_rocketlauncher_large.376e56473114d28a687759b568bbfb03cac12823.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Soldier"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_GRENADELAUNCHER",
+				"defindex": 19,
+				"item_class": "tf_weapon_grenadelauncher",
+				"item_type_name": "Grenade Launcher",
+				"item_name": "Grenade Launcher",
+				"proper_name": false,
+				"item_slot": "primary",
+				"model_player": "models/weapons/c_models/c_grenadelauncher/c_grenadelauncher.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_grenadelauncher",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_grenadelauncher.a430fe11337c5f14f68126a1d3d48fe4a67273af.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_grenadelauncher_large.1e6e606c6a76392bb98a6a03481ceca496250277.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Demoman"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_PIPEBOMBLAUNCHER",
+				"defindex": 20,
+				"item_class": "tf_weapon_pipebomblauncher",
+				"item_type_name": "Stickybomb Launcher",
+				"item_name": "Stickybomb Launcher",
+				"item_description": "Alt-Fire: Detonate all stickybombs",
+				"proper_name": false,
+				"item_slot": "secondary",
+				"model_player": "models/weapons/c_models/c_stickybomb_launcher/c_stickybomb_launcher.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_stickybomb_launcher",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_stickybomb_launcher.fec586622a8883019ef1acf2c3eb98a3a3b61bbc.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_stickybomb_launcher_large.ae44aadc5703600fa2c55bf774e665fca82bb063.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Demoman"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_FLAMETHROWER",
+				"defindex": 21,
+				"item_class": "tf_weapon_flamethrower",
+				"item_type_name": "Flame Thrower",
+				"item_name": "Flame Thrower",
+				"item_description": "Afterburn reduces Medi Gun healing and resist shield effects.\nAlt-Fire: Release a blast of air that pushes enemies and projectiles and extinguishes teammates that are on fire.",
+				"proper_name": false,
+				"item_slot": "primary",
+				"model_player": "models/weapons/c_models/c_flamethrower/c_flamethrower.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/c_models/c_flamethrower/c_flamethrower",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/c_flamethrower.d344f780c361cba3138ec8c887b419917c9ef2b6.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/c_flamethrower_large.8e40da0e6d0cd29cf61714512207c90972c10a5f.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Pyro"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_PISTOL",
+				"defindex": 22,
+				"item_class": "tf_weapon_pistol",
+				"item_type_name": "Pistol",
+				"item_name": "Pistol",
+				"proper_name": false,
+				"item_slot": "secondary",
+				"model_player": "models/weapons/c_models/c_pistol/c_pistol.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/c_models/c_pistol",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/c_pistol.711237b0fb5861ce3151058a11f430109205d3ba.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/c_pistol_large.7d17878ac86e6ca15c5217f361cdf89f6afba301.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Scout",
+					"Engineer"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_PISTOL_SCOUT",
+				"defindex": 23,
+				"item_class": "tf_weapon_pistol",
+				"item_type_name": "Pistol",
+				"item_name": "Pistol",
+				"proper_name": false,
+				"item_slot": "secondary",
+				"model_player": "models/weapons/c_models/c_pistol/c_pistol.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/c_models/c_pistol",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/c_pistol.711237b0fb5861ce3151058a11f430109205d3ba.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/c_pistol_large.7d17878ac86e6ca15c5217f361cdf89f6afba301.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Scout",
+					"Engineer"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_REVOLVER",
+				"defindex": 24,
+				"item_class": "tf_weapon_revolver",
+				"item_type_name": "Revolver",
+				"item_name": "Revolver",
+				"proper_name": false,
+				"item_slot": "secondary",
+				"model_player": "models/weapons/c_models/c_revolver/c_revolver.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_revolver",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_revolver.9b4a43c8ce5797a08d0dfb5d9d5bfb1b90928008.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_revolver_large.86226aa2ce07b33864b848add4a4e4f4771ffc18.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Spy"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_PDA_ENGINEER_BUILD",
+				"defindex": 25,
+				"item_class": "tf_weapon_pda_engineer_build",
+				"item_type_name": "PDA",
+				"item_name": "Construction PDA",
+				"proper_name": false,
+				"item_slot": "pda",
+				"model_player": "models/weapons/c_models/c_builder/c_builder.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_builder",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_builder.8c27f38136a143ac4941c877a32912fed6ce03dd.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_builder_large.95284962cb5dadfcfec6605468393bfc95e1a375.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Engineer"
+				]
+				,
+				"attributes": [
+					{
+						"name": "kill eater score type",
+						"class": "kill_eater_score_type",
+						"value": 3
+					},
+					{
+						"name": "kill eater score type 2",
+						"class": "kill_eater_score_type_2",
+						"value": 59
+					},
+					{
+						"name": "kill eater score type 3",
+						"class": "kill_eater_score_type_3",
+						"value": 60
+					}
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_PDA_ENGINEER_DESTROY",
+				"defindex": 26,
+				"item_class": "tf_weapon_pda_engineer_destroy",
+				"item_type_name": "PDA",
+				"item_name": "Destruction PDA",
+				"proper_name": false,
+				"item_slot": "pda2",
+				"model_player": "models/weapons/c_models/c_pda_engineer/c_pda_engineer.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_pda_engineer",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_pda_engineer.6ecf689c13d4f28d1637f924ae79b6d2b59f533a.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_pda_engineer_large.5c41fca9b3a2d85da4d552c454d95816d055ccfc.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Engineer"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_PDA_SPY",
+				"defindex": 27,
+				"item_class": "tf_weapon_pda_spy",
+				"item_type_name": "...Cigarette Case?",
+				"item_name": "Disguise Kit",
+				"proper_name": false,
+				"item_slot": "pda",
+				"model_player": "models/weapons/w_models/w_cigarette_case.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_cigarette_case",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_cigarette_case.bd42057354b57c5f20c5d3fe8a5194e173b260ea.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_cigarette_case_large.4a4aa0c46fea636388d9748e8f1859e04cdcda3b.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Spy"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_BUILDER",
+				"defindex": 28,
+				"item_class": "tf_weapon_builder",
+				"item_type_name": "PDA",
+				"item_name": "PDA",
+				"proper_name": false,
+				"item_slot": "building",
+				"model_player": "models/weapons/c_models/c_toolbox/c_toolbox.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/w_models/w_pda_engineer",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/w_pda_engineer.6ecf689c13d4f28d1637f924ae79b6d2b59f533a.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/w_pda_engineer_large.5c41fca9b3a2d85da4d552c454d95816d055ccfc.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Engineer"
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_MEDIGUN",
+				"defindex": 29,
+				"item_class": "tf_weapon_medigun",
+				"item_type_name": "Medi Gun",
+				"item_name": "Medi Gun",
+				"proper_name": false,
+				"item_slot": "secondary",
+				"model_player": "models/weapons/c_models/c_medigun/c_medigun.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/c_models/c_medigun/c_medigun",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/c_medigun.b2bcbd173ce0d73db1f14766b882e1e7288b54bb.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/c_medigun_large.e399cdaa4595e303b044e5b5bbe23dca48d8b9d1.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Medic"
+				]
+				,
+				"attributes": [
+					{
+						"name": "kill eater score type",
+						"class": "kill_eater_score_type",
+						"value": 1
+					},
+					{
+						"name": "kill eater score type 2",
+						"class": "kill_eater_score_type_2",
+						"value": 2
+					}
+				]
+				
+			},
+			{
+				"name": "TF_WEAPON_INVIS",
+				"defindex": 30,
+				"item_class": "tf_weapon_invis",
+				"item_type_name": "Invis Watch",
+				"item_name": "Invis Watch",
+				"item_description": "Alt-Fire: Turn invisible.  Cannot attack while invisible.  Bumping in to enemies will make you slightly visible to enemies",
+				"proper_name": false,
+				"item_slot": "pda2",
+				"model_player": "models/weapons/v_models/v_watch_spy.mdl",
+				"item_quality": 0,
+				"image_inventory": "backpack/weapons/c_models/c_spy_watch/parts/c_spy_watch",
+				"min_ilevel": 1,
+				"max_ilevel": 1,
+				"image_url": "http://media.steampowered.com/apps/440/icons/c_spy_watch.bce181d4e32e773e89dd2a424b377a8fc2de9e6c.png",
+				"image_url_large": "http://media.steampowered.com/apps/440/icons/c_spy_watch_large.162b1377564cac5b11bc5d32d15f2afa4bb4a389.png",
+				"craft_class": "weapon",
+				"craft_material_type": "weapon",
+				"capabilities": {
+					"nameable": true,
+					"can_gift_wrap": true,
+					"can_craft_mark": true,
+					"can_be_restored": true,
+					"strange_parts": true,
+					"can_card_upgrade": true,
+					"can_strangify": true,
+					"can_killstreakify": true,
+					"can_consume": true
+				},
+				"used_by_classes": [
+					"Spy"
+				]
+				,
+				"attributes": [
+					{
+						"name": "kill eater score type",
+						"class": "kill_eater_score_type",
+						"value": 58
+					}
+				]
+				
+			}
+		],
+		"next": 0
+}
