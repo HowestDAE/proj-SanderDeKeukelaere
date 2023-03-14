@@ -135,6 +135,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <EmbeddedResource Include="Resources\Data\items.json" />
+    <Resource Include="Resources\Fonts\tf2build.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
