@@ -100,6 +100,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Item.cs" />
+    <Compile Include="Model\ItemCapabilities.cs" />
+    <Compile Include="Model\ItemSchema.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -127,7 +130,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
     <Folder Include="Repository\" />
     <Folder Include="Resources\" />
     <Folder Include="ViewModel\" />
