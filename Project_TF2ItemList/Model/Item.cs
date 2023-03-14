@@ -39,5 +39,18 @@ namespace Project_TF2ItemList.Model
 
         [JsonProperty(PropertyName = "item_description")]
         public string ItemDescription { get; set; }         // The description of this item
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(ItemName);
+            if(ItemDescription != null && ItemDescription.Length > 0 )
+            {
+                sb.Append($" - {ItemDescription}");
+            }
+
+            return sb.ToString();
+        }
     }
 }
