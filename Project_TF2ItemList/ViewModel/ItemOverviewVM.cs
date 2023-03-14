@@ -11,8 +11,8 @@ namespace Project_TF2ItemList.ViewModel
 {
     public class ItemOverviewVM : ObservableObject
     {
-        private Item[] _items;
-        public Item[] Items
+        private List<Item> _items;
+        public List<Item> Items
         {
             get { return _items; }
             set { _items = value; }

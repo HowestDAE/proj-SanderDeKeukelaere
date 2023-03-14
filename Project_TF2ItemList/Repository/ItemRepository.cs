@@ -11,10 +11,11 @@ namespace Project_TF2ItemList.Repository
 {
     public class ItemRepository
     {
-        private static Item[] _items;
+        private static List<Item> _items;
 
-        public static Item[] GetItems()
+        public static List<Item> GetItems()
         {
+            // If item list already exists, return it
             if (_items != null) return _items;
 
             // Get assembly
@@ -33,12 +34,34 @@ namespace Project_TF2ItemList.Repository
                     string json = reader.ReadToEnd();
 
                     // Convert the json to a list of pokemons
-                    _items = JsonConvert.DeserializeObject<ItemSchema>(json).Items;
+                    _items = JsonConvert.DeserializeObject<ItemSchema>(json).Items.ToList();
                 }
             }
 
-            if (_items == null) _items = new Item[] { };
+            // If the item list doesn't exist, make an empty item list
+            if (_items == null) _items = new List<Item>();
 
+            // Remove doubles
+            for(int i = 0; i < _items.Count(); ++i)
+            {
+                Item curItem = _items[i];
+
+                // Get all items with the same name as the current item
+                List<Item> doubleItems = _items.FindAll(otherItem => otherItem.ItemName.Equals(curItem.ItemName));
+
+                foreach (Item doubleItem in doubleItems)
+                {
+                    if (doubleItem == curItem) continue;
+
+                    // Combine the classes list
+                    curItem.Classes.Concat(doubleItem.Classes);
+
+                    // Remove the double from the itemlist
+                    _items.Remove(doubleItem);
+                }
+            }
+
+            // Return the item list
             return _items;
         }
     }

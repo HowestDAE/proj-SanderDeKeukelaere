@@ -50,6 +50,13 @@ namespace Project_TF2ItemList.Model
                 sb.Append($" - {ItemDescription}");
             }
 
+            sb.Append(" - Used by: ");
+
+            foreach(string user in Classes)
+            {
+                sb.Append($"{user} ");
+            }
+
             return sb.ToString();
         }
     }
