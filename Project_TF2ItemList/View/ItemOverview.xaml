@@ -43,24 +43,26 @@
                             <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
 
+                        <Image Source="pack://application:,,,/Resources/Qualities/Unique.png"
+                               Grid.Column="1" Grid.Row="1"/>
+
                         <Image Source="{Binding ImageUrl}" Grid.Column="1" Grid.Row="1"/>
 
                         <TextBlock Text="{Binding ItemName}" 
-                                       Foreground="#F1EFED" 
-                                       VerticalAlignment="Center" HorizontalAlignment="Center"
-                                       FontSize="20"
-                                       Grid.ColumnSpan="3" Grid.Row="2"
-                                       FontFamily="{StaticResource TF2Font}"
-                                       FontStyle="Normal" FontWeight="Regular"/>
+                                   Foreground="#F1EFED" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"
+                                   FontSize="20"
+                                   Grid.ColumnSpan="3" Grid.Row="2"
+                                   FontFamily="{StaticResource TF2Font}"/>
 
                         <TextBlock Text="{Binding ItemDescription}" 
-                                       Foreground="#F1EFED" 
-                                       VerticalAlignment="Top" HorizontalAlignment="Center"
-                                       FontSize="10"
-                                       Grid.ColumnSpan="3" Grid.Row="3"
-                                       TextWrapping="Wrap"
-                                       FontFamily="{StaticResource TF2Font}"
-                                       FontStyle="Normal" FontWeight="Regular"/>
+                                   Foreground="#F1EFED" 
+                                   VerticalAlignment="Top" HorizontalAlignment="Center"
+                                   FontSize="10"
+                                   Grid.ColumnSpan="3" Grid.Row="3"
+                                   TextWrapping="Wrap"
+                                   FontFamily="{StaticResource TF2Font}"
+                                   Margin="10,0,10,0"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
