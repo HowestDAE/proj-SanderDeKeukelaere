@@ -88,6 +88,7 @@
     </ApplicationDefinition>
     <Compile Include="Repository\ItemRepository.cs" />
     <Compile Include="ViewModel\ItemOverviewVM.cs" />
+    <Compile Include="View\Converters\ClassToIconConverter.cs" />
     <Compile Include="View\ItemOverview.xaml.cs">
       <DependentUpon>ItemOverview.xaml</DependentUpon>
     </Compile>
@@ -142,6 +143,17 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Qualities\Unique.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ClassSymbols\demoman.png" />
+    <Resource Include="Resources\ClassSymbols\engineer.png" />
+    <Resource Include="Resources\ClassSymbols\heavy.png" />
+    <Resource Include="Resources\ClassSymbols\medic.png" />
+    <Resource Include="Resources\ClassSymbols\pyro.png" />
+    <Resource Include="Resources\ClassSymbols\scout.png" />
+    <Resource Include="Resources\ClassSymbols\sniper.png" />
+    <Resource Include="Resources\ClassSymbols\soldier.png" />
+    <Resource Include="Resources\ClassSymbols\spy.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\CommunityToolkit.Mvvm.8.1.0\build\netstandard2.0\CommunityToolkit.Mvvm.targets" Condition="Exists('packages\CommunityToolkit.Mvvm.8.1.0\build\netstandard2.0\CommunityToolkit.Mvvm.targets')" />
