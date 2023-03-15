@@ -47,11 +47,15 @@ namespace Project_TF2ItemList.Repository
             {
                 Item curItem = _items[i];
 
+                if (curItem.Classes == null) continue;
+
                 // Get all items with the same name as the current item
                 List<Item> doubleItems = _items.FindAll(otherItem => otherItem != curItem && otherItem.ItemName.Equals(curItem.ItemName));
 
                 foreach (Item doubleItem in doubleItems)
                 {
+                    if (doubleItem.Classes == null) continue;
+
                     // Combine the classes list
                     curItem.Classes.AddRange(doubleItem.Classes);
 
@@ -63,6 +67,8 @@ namespace Project_TF2ItemList.Repository
             // Get all classes
             foreach(Item item in _items)
             {
+                if (item.Classes == null) continue;
+
                 if (item.Classes.Count == 0) continue;
 
                 foreach(string className in item.Classes)
