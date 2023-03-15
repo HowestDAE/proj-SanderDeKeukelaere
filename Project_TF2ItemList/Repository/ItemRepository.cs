@@ -12,6 +12,7 @@ namespace Project_TF2ItemList.Repository
     public class ItemRepository
     {
         private static List<Item> _items;
+        private static List<string> _classes = new List<string>();
 
         public static List<Item> GetItems()
         {
@@ -59,8 +60,42 @@ namespace Project_TF2ItemList.Repository
                 }
             }
 
+            // Get all classes
+            foreach(Item item in _items)
+            {
+                if (item.Classes.Count == 0) continue;
+
+                foreach(string className in item.Classes)
+                {
+                    if(_classes.Contains(className)) continue;
+
+                    _classes.Add(className);
+                }
+            }
+
             // Return the item list
             return _items;
+        }
+
+        public static List<Item> GetItems(string className)
+        {
+            GetItems();
+
+            List<Item> items = new List<Item>();
+
+            foreach(Item item in _items)
+            {
+                if (item.Classes.Contains(className)) items.Add(item);
+            }
+
+            return items;
+        }
+
+        public static List<string> GetClasses()
+        {
+            GetItems();
+
+            return _classes;
         }
     }
 }

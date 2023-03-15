@@ -19,9 +19,16 @@
         <FontFamily x:Key="TF2Font">pack://application:,,,/Resources/Fonts/#TF2 Build</FontFamily>
         <SolidColorBrush x:Key="TextColour" Color="#F1EFED"/>
     </Page.Resources>
-    
+
     <Grid>
-        <ListBox ItemsSource="{Binding Items}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <ComboBox ItemsSource="{Binding Classes}" SelectedItem="{Binding SelectedClass}"/>
+
+        <ListBox Grid.Row="1" ItemsSource="{Binding Items}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ScrollContentPresenter}}}" Orientation="Horizontal"/>
