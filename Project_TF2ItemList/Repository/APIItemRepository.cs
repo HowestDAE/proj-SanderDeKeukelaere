@@ -33,8 +33,6 @@ namespace Project_TF2ItemList.Repository
                     string json = await response.Content.ReadAsStringAsync();
 
                     _items = JsonConvert.DeserializeObject<JObject>(json).SelectToken("result").SelectToken("items").ToObject<List<Item>>();
-
-                    _items.RemoveRange(200, _items.Count() - 200);
                 }
                 catch (Exception)
                 {
@@ -44,6 +42,9 @@ namespace Project_TF2ItemList.Repository
 
             // If the item list doesn't exist, make an empty item list
             if (_items == null) _items = new List<Item>();
+
+            // Remove items without image
+            _items.RemoveAll(item => item.ImageUrl == null);
 
             await Task.Run(() =>
             {
@@ -75,25 +76,26 @@ namespace Project_TF2ItemList.Repository
                 }
             });
 
-            await Task.Run(() =>
+
+
+            _items.RemoveRange(200, _items.Count() - 200);
+
+            // Get all classes
+            foreach (Item item in _items)
             {
-                // Get all classes
-                foreach (Item item in _items)
+                if (item.Classes == null) continue;
+
+                if (item.Classes.Count == 0) continue;
+
+                foreach (string className in item.Classes)
                 {
-                    if (item.Classes == null) continue;
+                    if (_classes.Contains(className)) continue;
 
-                    if (item.Classes.Count == 0) continue;
-
-                    foreach (string className in item.Classes)
-                    {
-                        if (_classes.Contains(className)) continue;
-
-                        _classes.Add(className);
-                    }
-
-                    if (_classes.Count() == 9) break;
+                    _classes.Add(className);
                 }
-            });
+
+                if (_classes.Count() == 9) break;
+            }
         }
 
         public async Task<List<string>> GetClasses()
