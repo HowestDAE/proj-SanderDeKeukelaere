@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Project_TF2ItemList.Repository
 {
-    public class ItemRepository
+    public class LocalItemRepository : IItemRepository
     {
-        private static List<Item> _items;
-        private static List<string> _classes = new List<string>();
+        private List<Item> _items;
+        private List<string> _classes = new List<string>();
 
-        public static List<Item> GetItems()
+        public List<Item> GetItems()
         {
             // If item list already exists, return it
             if (_items != null) return _items;
@@ -88,7 +88,7 @@ namespace Project_TF2ItemList.Repository
             return _items;
         }
 
-        public static List<Item> GetItems(string className)
+        public List<Item> GetItems(string className)
         {
             GetItems();
 
@@ -102,7 +102,7 @@ namespace Project_TF2ItemList.Repository
             return items;
         }
 
-        public static List<string> GetClasses()
+        public List<string> GetClasses()
         {
             GetItems();
 

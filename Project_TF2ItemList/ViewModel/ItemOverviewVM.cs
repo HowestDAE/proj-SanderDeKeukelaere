@@ -34,11 +34,11 @@ namespace Project_TF2ItemList.ViewModel
                 _selectedClass = value;
                 if (_selectedClass.Equals("<all classes>"))
                 {
-                    Items = ItemRepository.GetItems();
+                    Items = LocalItemRepository.GetItems();
                 }
                 else
                 {
-                    Items = ItemRepository.GetItems(_selectedClass);
+                    Items = LocalItemRepository.GetItems(_selectedClass);
                 }
                 OnPropertyChanged(nameof(SelectedClass));
             }
@@ -47,8 +47,8 @@ namespace Project_TF2ItemList.ViewModel
 
         public ItemOverviewVM()
         {
-            Items = ItemRepository.GetItems();
-            Classes = ItemRepository.GetClasses();
+            Items = LocalItemRepository.GetItems();
+            Classes = LocalItemRepository.GetClasses();
 
             // Add "all classes" to classes list
             Classes.Add("<all classes>");
