@@ -57,7 +57,12 @@ namespace Project_TF2ItemList.Repository
                     if (doubleItem.Classes == null) continue;
 
                     // Combine the classes list
-                    curItem.Classes.AddRange(doubleItem.Classes);
+                    foreach (string className in doubleItem.Classes)
+                    {
+                        if(curItem.Classes.Contains(className)) continue;
+
+                        curItem.Classes.Add(className);
+                    }
 
                     // Remove the double from the itemlist
                     _items.Remove(doubleItem);
