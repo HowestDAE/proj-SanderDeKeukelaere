@@ -91,6 +91,7 @@
     <Compile Include="Repository\LocalItemRepository.cs" />
     <Compile Include="ViewModel\ItemOverviewVM.cs" />
     <Compile Include="View\Converters\ClassToIconConverter.cs" />
+    <Compile Include="View\Converters\QualityToImageConverter.cs" />
     <Compile Include="View\ItemOverview.xaml.cs">
       <DependentUpon>ItemOverview.xaml</DependentUpon>
     </Compile>
@@ -156,6 +157,19 @@
     <Resource Include="Resources\ClassSymbols\sniper.png" />
     <Resource Include="Resources\ClassSymbols\soldier.png" />
     <Resource Include="Resources\ClassSymbols\spy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Qualities\Collector%27s.png" />
+    <Resource Include="Resources\Qualities\Community.png" />
+    <Resource Include="Resources\Qualities\Decorated.png" />
+    <Resource Include="Resources\Qualities\Genuine.png" />
+    <Resource Include="Resources\Qualities\Haunted.png" />
+    <Resource Include="Resources\Qualities\Normal.png" />
+    <Resource Include="Resources\Qualities\Self-Made.png" />
+    <Resource Include="Resources\Qualities\Strange.png" />
+    <Resource Include="Resources\Qualities\Unusual.png" />
+    <Resource Include="Resources\Qualities\Valve.png" />
+    <Resource Include="Resources\Qualities\Vintage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\CommunityToolkit.Mvvm.8.1.0\build\netstandard2.0\CommunityToolkit.Mvvm.targets" Condition="Exists('packages\CommunityToolkit.Mvvm.8.1.0\build\netstandard2.0\CommunityToolkit.Mvvm.targets')" />

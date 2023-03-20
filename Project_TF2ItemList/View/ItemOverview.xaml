@@ -19,8 +19,9 @@
     <Page.Resources>
         <FontFamily x:Key="TF2Font">pack://application:,,,/Resources/Fonts/#TF2 Build</FontFamily>
         <SolidColorBrush x:Key="TextColour" Color="#F1EFED"/>
-        
+
         <convert:ClassToIconConverter x:Key="ClassToIcon"/>
+        <convert:QualityToImageConverter x:Key="QualityToImage"/>
     </Page.Resources>
 
     <Grid>
@@ -56,7 +57,7 @@
                             <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Source="pack://application:,,,/Resources/Qualities/Unique.png"
+                        <Image Source="{Binding ItemQuality, Converter={StaticResource QualityToImage}}"
                                Grid.Column="1" Grid.Row="1"/>
 
                         <Image Source="{Binding ImageUrl}" Grid.Column="1" Grid.Row="1"/>
