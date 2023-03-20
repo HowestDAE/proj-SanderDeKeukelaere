@@ -39,11 +39,11 @@
                     <WrapPanel Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ScrollContentPresenter}}}" Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
-            
+
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="350" Height="260"
-                              Background="#3C352E">
+                              Background="Transparent">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="10"/>
                             <RowDefinition/>
@@ -56,6 +56,10 @@
                             <ColumnDefinition/>
                             <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
+
+                        <Rectangle Grid.RowSpan="4" Grid.ColumnSpan="3"
+                                   RadiusX="10" RadiusY="10"
+                                   Fill="#3C352E"/>
 
                         <Image Source="{Binding ItemQuality, Converter={StaticResource QualityToImage}}"
                                Grid.Column="1" Grid.Row="1"/>
@@ -79,7 +83,7 @@
                                   Foreground="{StaticResource TextColour}"
                                   FontFamily="{StaticResource TF2Font}"
                                   IsHitTestVisible="False">
-                            
+
                             <ListView.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal"/>
