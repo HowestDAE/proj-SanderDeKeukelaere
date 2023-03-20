@@ -9,8 +9,8 @@ namespace Project_TF2ItemList.Repository
 {
     internal interface IItemRepository
     {
-        List<Item> GetItems();
-        List<Item> GetItems(string className);
-        List<string> GetClasses();
+        Task<List<Item>> GetItems();
+        Task<List<Item>> GetItems(string className);
+        Task<List<string>> GetClasses();
     }
 }

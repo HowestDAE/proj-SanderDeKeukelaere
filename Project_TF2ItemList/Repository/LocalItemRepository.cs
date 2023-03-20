@@ -14,7 +14,7 @@ namespace Project_TF2ItemList.Repository
         private List<Item> _items;
         private List<string> _classes = new List<string>();
 
-        public List<Item> GetItems()
+        public async Task<List<Item>> GetItems()
         {
             // If item list already exists, return it
             if (_items != null) return _items;
@@ -25,72 +25,75 @@ namespace Project_TF2ItemList.Repository
             // Embedded file
             const string resourceName = "Project_TF2ItemList.Resources.Data.items.json";
 
-            // Load resource from assembly
-            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            await Task.Run(() =>
             {
-                // Open a stream reader
-                using (var reader = new StreamReader(stream))
+                // Load resource from assembly
+                using (var stream = assembly.GetManifestResourceStream(resourceName))
                 {
-                    // Read all text in the resource
-                    string json = reader.ReadToEnd();
-
-                    // Convert the json to a list of pokemons
-                    _items = JsonConvert.DeserializeObject<ItemSchema>(json).Items.ToList();
-                }
-            }
-
-            // If the item list doesn't exist, make an empty item list
-            if (_items == null) _items = new List<Item>();
-
-            // Remove doubles
-            for(int i = 0; i < _items.Count(); ++i)
-            {
-                Item curItem = _items[i];
-
-                if (curItem.Classes == null) continue;
-
-                // Get all items with the same name as the current item
-                List<Item> doubleItems = _items.FindAll(otherItem => otherItem != curItem && otherItem.ItemName.Equals(curItem.ItemName));
-
-                foreach (Item doubleItem in doubleItems)
-                {
-                    if (doubleItem.Classes == null) continue;
-
-                    // Combine the classes list
-                    foreach (string className in doubleItem.Classes)
+                    // Open a stream reader
+                    using (var reader = new StreamReader(stream))
                     {
-                        if(curItem.Classes.Contains(className)) continue;
+                        // Read all text in the resource
+                        string json = reader.ReadToEnd();
 
-                        curItem.Classes.Add(className);
+                        // Convert the json to a list of pokemons
+                        _items = JsonConvert.DeserializeObject<ItemSchema>(json).Items.ToList();
                     }
-
-                    // Remove the double from the itemlist
-                    _items.Remove(doubleItem);
                 }
-            }
 
-            // Get all classes
-            foreach(Item item in _items)
-            {
-                if (item.Classes == null) continue;
+                // If the item list doesn't exist, make an empty item list
+                if (_items == null) _items = new List<Item>();
 
-                if (item.Classes.Count == 0) continue;
-
-                foreach(string className in item.Classes)
+                // Remove doubles
+                for (int i = 0; i < _items.Count(); ++i)
                 {
-                    if(_classes.Contains(className)) continue;
+                    Item curItem = _items[i];
 
-                    _classes.Add(className);
+                    if (curItem.Classes == null) continue;
+
+                    // Get all items with the same name as the current item
+                    List<Item> doubleItems = _items.FindAll(otherItem => otherItem != curItem && otherItem.ItemName.Equals(curItem.ItemName));
+
+                    foreach (Item doubleItem in doubleItems)
+                    {
+                        if (doubleItem.Classes == null) continue;
+
+                        // Combine the classes list
+                        foreach (string className in doubleItem.Classes)
+                        {
+                            if (curItem.Classes.Contains(className)) continue;
+
+                            curItem.Classes.Add(className);
+                        }
+
+                        // Remove the double from the itemlist
+                        _items.Remove(doubleItem);
+                    }
                 }
-            }
+
+                // Get all classes
+                foreach (Item item in _items)
+                {
+                    if (item.Classes == null) continue;
+
+                    if (item.Classes.Count == 0) continue;
+
+                    foreach (string className in item.Classes)
+                    {
+                        if (_classes.Contains(className)) continue;
+
+                        _classes.Add(className);
+                    }
+                }
+            });
 
             // Return the item list
             return _items;
         }
 
-        public List<Item> GetItems(string className)
+        public async Task<List<Item>> GetItems(string className)
         {
-            GetItems();
+            await GetItems();
 
             List<Item> items = new List<Item>();
 
@@ -102,9 +105,9 @@ namespace Project_TF2ItemList.Repository
             return items;
         }
 
-        public List<string> GetClasses()
+        public async Task<List<string>> GetClasses()
         {
-            GetItems();
+            await GetItems();
 
             return _classes;
         }

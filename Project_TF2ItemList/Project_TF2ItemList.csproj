@@ -86,7 +86,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Repository\ItemRepository.cs" />
+    <Compile Include="Repository\APIItemRepository.cs" />
+    <Compile Include="Repository\IItemRepository.cs" />
+    <Compile Include="Repository\LocalItemRepository.cs" />
     <Compile Include="ViewModel\ItemOverviewVM.cs" />
     <Compile Include="View\Converters\ClassToIconConverter.cs" />
     <Compile Include="View\ItemOverview.xaml.cs">

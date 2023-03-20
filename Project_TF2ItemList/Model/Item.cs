@@ -25,7 +25,7 @@ namespace Project_TF2ItemList.Model
         [JsonProperty(PropertyName = "max_ilevel")]
         public int MaximumLevel { get; set; }               // The maximum possible level of the item
 
-        [JsonProperty(PropertyName = "image_url_large")]
+        [JsonProperty(PropertyName = "image_url")]
         public string ImageUrl { get; set; }                // Url to the image of the item
 
         [JsonProperty(PropertyName = "craft_class")]
@@ -50,11 +50,14 @@ namespace Project_TF2ItemList.Model
                 sb.Append($" - {ItemDescription}");
             }
 
-            sb.Append(" - Used by: ");
-
-            foreach(string user in Classes)
+            if (Classes != null)
             {
-                sb.Append($"{user} ");
+                sb.Append(" - Used by: ");
+
+                foreach (string user in Classes)
+                {
+                    sb.Append($"{user} ");
+                }
             }
 
             return sb.ToString();
