@@ -49,7 +49,7 @@ namespace Project_TF2ItemList.Repository
             await Task.Run(() =>
             {
                 // Remove doubles
-                for (int i = 0; i < _items.Count(); ++i)
+                for(int i = 0; i < _items.Count; ++i)
                 {
                     Item curItem = _items[i];
 
