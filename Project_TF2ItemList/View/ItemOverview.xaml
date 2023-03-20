@@ -67,7 +67,8 @@
                                    VerticalAlignment="Center" HorizontalAlignment="Center"
                                    FontSize="20"
                                    Grid.ColumnSpan="3" Grid.Row="2"
-                                   FontFamily="{StaticResource TF2Font}"/>
+                                   FontFamily="{StaticResource TF2Font}"
+                                   TextWrapping="Wrap"/>
 
                         <ListView ItemsSource="{Binding Classes}"
                                   Grid.ColumnSpan="3" Grid.Row="3"
