@@ -6,8 +6,28 @@
         xmlns:local="clr-namespace:Project_TF2ItemList"
         xmlns:view="clr-namespace:Project_TF2ItemList.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <view:ItemOverview>
+        Title="MainWindow" Width="1475" Height="720">
+
+    <Window.Resources>
+        <view:ItemOverview x:Key="OverviewPage"/>
+
+        <FontFamily x:Key="TF2Font">pack://application:,,,/Resources/Fonts/#TF2 Build</FontFamily>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
         
-    </view:ItemOverview>
+        <Frame NavigationUIVisibility="Hidden" Content="{StaticResource OverviewPage}"/>
+
+        <Button Grid.Row="1" 
+                FontFamily="{StaticResource TF2Font}"
+                FontSize="20"
+                Foreground="#F1EFED"
+                Background="#3C352E">
+            INSPECT ITEM
+        </Button>
+    </Grid>
 </Window>
