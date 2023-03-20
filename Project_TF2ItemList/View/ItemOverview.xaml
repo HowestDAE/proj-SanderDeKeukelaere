@@ -7,8 +7,8 @@
       xmlns:vm="clr-namespace:Project_TF2ItemList.ViewModel"
       xmlns:convert="clr-namespace:Project_TF2ItemList.View.Converters"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="802"
-      WindowWidth="815" WindowHeight="450"
+      d:DesignHeight="1280" d:DesignWidth="720"
+      WindowWidth="1475" WindowHeight="720"
       Background="#282624"
       Title="ItemOverview">
 
@@ -31,7 +31,8 @@
 
         <ComboBox ItemsSource="{Binding Classes}" SelectedItem="{Binding SelectedClass}"/>
 
-        <ListBox Grid.Row="1" ItemsSource="{Binding Items}">
+        <ListBox Grid.Row="1" ItemsSource="{Binding Items}"
+                 Background="#282624">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ScrollContentPresenter}}}" Orientation="Horizontal"/>
@@ -40,7 +41,7 @@
             
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="250" Height="260"
+                    <Grid Width="350" Height="260"
                               Background="#3C352E">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="10"/>
@@ -86,7 +87,7 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Image Source="{Binding Converter={StaticResource ClassToIcon}}"
-											Width="40" Height="40"/>
+										   Width="30" Height="30"/>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
