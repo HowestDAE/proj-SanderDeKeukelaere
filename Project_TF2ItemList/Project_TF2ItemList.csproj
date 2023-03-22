@@ -92,6 +92,9 @@
     <Compile Include="ViewModel\ItemOverviewVM.cs" />
     <Compile Include="View\Converters\ClassToIconConverter.cs" />
     <Compile Include="View\Converters\QualityToImageConverter.cs" />
+    <Compile Include="View\ItemInspection.xaml.cs">
+      <DependentUpon>ItemInspection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ItemOverview.xaml.cs">
       <DependentUpon>ItemOverview.xaml</DependentUpon>
     </Compile>
@@ -107,6 +110,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ItemInspection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ItemOverview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

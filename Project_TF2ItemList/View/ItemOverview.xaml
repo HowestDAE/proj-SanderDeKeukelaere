@@ -80,8 +80,6 @@
 								  VerticalAlignment="Center"
                                   Background="Transparent"
                                   BorderBrush="Transparent"
-                                  Foreground="{StaticResource TextColour}"
-                                  FontFamily="{StaticResource TF2Font}"
                                   IsHitTestVisible="False">
 
                             <ListView.ItemsPanel>
