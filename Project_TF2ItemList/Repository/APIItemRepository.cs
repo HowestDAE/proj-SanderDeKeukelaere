@@ -126,14 +126,16 @@ namespace Project_TF2ItemList.Repository
             return items;
         }
 
-        public async Task<List<Item>> GetItemsInSet(string itemSet)
+        public List<Item> GetItemsInSet(string itemSet)
         {
-            await GetItems();
-
             List<Item> items = new List<Item>();
+
+            if (itemSet == null) return items;
 
             foreach (Item item in _items)
             {
+                if (item.ItemSet == null) continue;
+
                 if (item.ItemSet.Equals(itemSet)) items.Add(item);
             }
 

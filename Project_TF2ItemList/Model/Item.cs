@@ -31,8 +31,18 @@ namespace Project_TF2ItemList.Model
         [JsonProperty(PropertyName = "craft_class")]
         public string ItemType { get; set; }                // What type of item is it
 
+        private string _itemSet;
         [JsonProperty(PropertyName = "item_set")]
-        public string ItemSet { get; set; }
+        public string ItemSet
+        {
+            get
+            {
+                if (_itemSet == null) return null;
+                return _itemSet.Replace('_', ' ');
+            }
+
+            set { _itemSet = value; }
+        }
 
         [JsonProperty(PropertyName = "capabilities")]
         public Capabilities Capabilities { get; set; }      // What can the user do with this item
@@ -48,7 +58,7 @@ namespace Project_TF2ItemList.Model
             StringBuilder sb = new StringBuilder();
 
             sb.Append(ItemName);
-            if(ItemDescription != null && ItemDescription.Length > 0 )
+            if (ItemDescription != null && ItemDescription.Length > 0)
             {
                 sb.Append($" - {ItemDescription}");
             }

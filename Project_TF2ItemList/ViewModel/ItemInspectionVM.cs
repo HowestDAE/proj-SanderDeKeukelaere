@@ -18,6 +18,7 @@ namespace Project_TF2ItemList.ViewModel
             set
             {
                 _currentItem = value;
+                ItemsInSet = ItemOverviewVM.ItemRepository.GetItemsInSet(_currentItem.ItemSet);
                 OnPropertyChanged(nameof(CurrentItem));
             }
         }

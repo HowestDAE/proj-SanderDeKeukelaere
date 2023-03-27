@@ -125,31 +125,43 @@
                          TextWrapping="Wrap"  
                          Margin="0,20"/>
 
-                <TextBlock Text="CAPABILITIES"   
-                         Foreground="{StaticResource TextColour}"  
-                         VerticalAlignment="Center" HorizontalAlignment="Center"  
-                         FontSize="20"  
-                         FontWeight="Bold"  
-                         FontFamily="{StaticResource TF2Font}"  
-                         TextWrapping="Wrap"  
-                         Margin="0,20,0,20"/>
-
-                <Grid Visibility="{Binding CurrentItem.ItemSet, Converter={StaticResource StringToVisibilty}}">
+                <Grid Visibility="{Binding CurrentItem.ItemSet, Converter={StaticResource StringToVisibilty}}"
+                      Background="Transparent">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Foreground="#E4FB70" Text="{Binding CurrentItem.ItemSet}"/>
+                    <TextBlock Foreground="#E4FB70" 
+                               FontSize="20"  
+                               FontFamily="{StaticResource TF2Font}" 
+                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                               Text="{Binding CurrentItem.ItemSet}"
+							   Grid.Row="0"/>
 
-                    <ListView ItemsSource="{Binding ItemsInSet}">
+                    <ListView ItemsSource="{Binding ItemsInSet}"
+                              BorderBrush="Transparent"
+                              Background="Transparent"
+							  Grid.Row="1">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Foreground="{StaticResource TextColour}" Text="{Binding ItemName}"/>
+                                <TextBlock Foreground="{StaticResource TextColour}" 
+                                           FontSize="20"  
+                                           FontFamily="{StaticResource TF2Font}" 
+                                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                                           Text="{Binding ItemName}"/>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
                 </Grid>
+
+                <TextBlock Text="CAPABILITIES"   
+                         Foreground="{StaticResource TextColour}"  
+                         VerticalAlignment="Center" HorizontalAlignment="Center"  
+                         FontSize="20"
+                         FontFamily="{StaticResource TF2Font}"  
+                         TextWrapping="Wrap"  
+                         Margin="0,20,0,20"/>
 
                 <ListView HorizontalAlignment="Center"  
 					      VerticalAlignment="Center"  

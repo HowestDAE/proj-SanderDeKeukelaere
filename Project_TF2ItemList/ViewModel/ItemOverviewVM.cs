@@ -11,7 +11,7 @@ namespace Project_TF2ItemList.ViewModel
 {
     public class ItemOverviewVM : ObservableObject
     {
-        IItemRepository _itemRepository = new APIItemRepository/*LocalItemRepository*/();
+        static public IItemRepository ItemRepository { get; set; } = new APIItemRepository/*LocalItemRepository*/();
 
         private List<Item> _items;
         public List<Item> Items
@@ -66,8 +66,8 @@ namespace Project_TF2ItemList.ViewModel
 
         private async void LoadItemsAndClasses()
         {
-            Items = await _itemRepository.GetItems();
-            Classes = await _itemRepository.GetClasses();
+            Items = await ItemRepository.GetItems();
+            Classes = await ItemRepository.GetClasses();
 
             // Add "all classes" to classes list
             Classes.Add("<all classes>");
@@ -78,11 +78,11 @@ namespace Project_TF2ItemList.ViewModel
         {
             if (_selectedClass.Equals("<all classes>"))
             {
-                Items = await _itemRepository.GetItems();
+                Items = await ItemRepository.GetItems();
             }
             else
             {
-                Items = await _itemRepository.GetItems(_selectedClass);
+                Items = await ItemRepository.GetItems(_selectedClass);
             }
         }
     }
