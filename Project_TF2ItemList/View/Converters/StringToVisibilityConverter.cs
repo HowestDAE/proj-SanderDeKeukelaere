@@ -13,10 +13,10 @@ namespace Project_TF2ItemList.View.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value != null)
+            if (value != null && ((string)value).Length > 0)
                 return Visibility.Visible;
             else
-                return Visibility.Hidden;
+                return Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
