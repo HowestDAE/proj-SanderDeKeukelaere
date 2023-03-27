@@ -89,9 +89,14 @@
     <Compile Include="Repository\APIItemRepository.cs" />
     <Compile Include="Repository\IItemRepository.cs" />
     <Compile Include="Repository\LocalItemRepository.cs" />
+    <Compile Include="ViewModel\ItemInspectionVM.cs" />
     <Compile Include="ViewModel\ItemOverviewVM.cs" />
+    <Compile Include="View\Converters\ClassToVisibilityConverter.cs" />
     <Compile Include="View\Converters\ClassToIconConverter.cs" />
+    <Compile Include="View\Converters\QualityToHexColorConverter.cs" />
+    <Compile Include="View\Converters\QualityToNameConverter.cs" />
     <Compile Include="View\Converters\QualityToImageConverter.cs" />
+    <Compile Include="View\Converters\StringToVisibilityConverter.cs" />
     <Compile Include="View\ItemInspection.xaml.cs">
       <DependentUpon>ItemInspection.xaml</DependentUpon>
     </Compile>
@@ -155,17 +160,6 @@
     <Resource Include="Resources\Qualities\Unique.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\ClassSymbols\demoman.png" />
-    <Resource Include="Resources\ClassSymbols\engineer.png" />
-    <Resource Include="Resources\ClassSymbols\heavy.png" />
-    <Resource Include="Resources\ClassSymbols\medic.png" />
-    <Resource Include="Resources\ClassSymbols\pyro.png" />
-    <Resource Include="Resources\ClassSymbols\scout.png" />
-    <Resource Include="Resources\ClassSymbols\sniper.png" />
-    <Resource Include="Resources\ClassSymbols\soldier.png" />
-    <Resource Include="Resources\ClassSymbols\spy.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Qualities\Collector%27s.png" />
     <Resource Include="Resources\Qualities\Community.png" />
     <Resource Include="Resources\Qualities\Decorated.png" />
@@ -177,6 +171,18 @@
     <Resource Include="Resources\Qualities\Unusual.png" />
     <Resource Include="Resources\Qualities\Valve.png" />
     <Resource Include="Resources\Qualities\Vintage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Symbols\Checkmark.png" />
+    <Resource Include="Resources\Symbols\demoman.png" />
+    <Resource Include="Resources\Symbols\engineer.png" />
+    <Resource Include="Resources\Symbols\heavy.png" />
+    <Resource Include="Resources\Symbols\medic.png" />
+    <Resource Include="Resources\Symbols\pyro.png" />
+    <Resource Include="Resources\Symbols\scout.png" />
+    <Resource Include="Resources\Symbols\sniper.png" />
+    <Resource Include="Resources\Symbols\soldier.png" />
+    <Resource Include="Resources\Symbols\spy.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\CommunityToolkit.Mvvm.8.1.0\build\netstandard2.0\CommunityToolkit.Mvvm.targets" Condition="Exists('packages\CommunityToolkit.Mvvm.8.1.0\build\netstandard2.0\CommunityToolkit.Mvvm.targets')" />
