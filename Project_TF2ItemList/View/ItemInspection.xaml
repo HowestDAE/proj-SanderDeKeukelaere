@@ -18,6 +18,7 @@
     <Page.Resources>
         <FontFamily x:Key="TF2Font">pack://application:,,,/Resources/Fonts/#TF2 Build</FontFamily>
         <SolidColorBrush x:Key="TextColour" Color="#F1EFED"/>
+        <SolidColorBrush x:Key="HeaderColour" Color="#766B5E"/>
 
         <convert:ClassToIconConverter x:Key="ClassToIcon"/>
         <convert:QualityToImageConverter x:Key="QualityToImage"/>
@@ -43,13 +44,33 @@
 			   Source="{Binding CurrentItem.ImageUrl}"
                Grid.Row="1"/>
 
-        <ScrollViewer Grid.Row="3"
-                      HorizontalContentAlignment="Center">
-            <ListView
-                      HorizontalContentAlignment="Center" 
-                      Background="Transparent"
-                      BorderBrush="Transparent"
-                      IsHitTestVisible="False">
+        <ScrollViewer Grid.Row="3">
+            <Grid
+                  Background="Transparent">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="600"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
                 <TextBlock Text="{Binding CurrentItem.ItemQuality, Converter={StaticResource QualityToName}}"  
                         Foreground="{Binding CurrentItem.ItemQuality, Converter={StaticResource QualityToHexColor}}" 
@@ -57,7 +78,8 @@
                         FontSize="20" 
                         FontFamily="{StaticResource TF2Font}" 
                         TextWrapping="Wrap" 
-                        Margin="0,3"/>
+                        Margin="0,0,0,0"
+						Grid.Row="0" Grid.Column="1"/>
 
                 <TextBlock Text="{Binding CurrentItem.ItemName}"   
                          Foreground="{StaticResource TextColour}"  
@@ -65,25 +87,8 @@
                          FontSize="20"  
                          FontFamily="{StaticResource TF2Font}"  
                          TextWrapping="Wrap"  
-                         Margin="0,3"/>
-
-                <TextBlock Text="Minimal level: 0   Maximum level: 9000"   
-                         Foreground="{StaticResource TextColour}"  
-                         VerticalAlignment="Center" HorizontalAlignment="Center"  
-                         FontSize="20"  
-                         FontFamily="{StaticResource TF2Font}"  
-                         TextWrapping="Wrap"  
-                         Margin="0,30"  
-                         Grid.Row="2"/>
-
-                <TextBlock Text="{Binding CurrentItem.ItemDescription}"  
-                         Foreground="{StaticResource TextColour}"  
-                         VerticalAlignment="Center" HorizontalAlignment="Center"  
-                         FontSize="20"  
-                         FontFamily="{StaticResource TF2Font}"  
-                         TextWrapping="Wrap"  
-                         Width="700"  
-                         Margin="0,10"/>
+                         Margin="0,5,0,0"
+						 Grid.Row="1" Grid.Column="1"/>
 
                 <ListView ItemsSource="{Binding CurrentItem.Classes}"  
                         HorizontalAlignment="Center"  
@@ -93,7 +98,9 @@
                         Foreground="{StaticResource TextColour}"  
                         FontFamily="{StaticResource TF2Font}"  
                         IsHitTestVisible="False"  
-                        Margin="0,20">
+                        Margin="0,35,0,35"
+						Grid.Row="2" Grid.Column="1"
+                        VerticalContentAlignment="Center">
 
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -108,25 +115,11 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-
-                <TextBlock Text="Item type: WEAPON"   
-                         Foreground="{StaticResource TextColour}"  
-                         VerticalAlignment="Center" HorizontalAlignment="Center"  
-                         FontSize="20"  
-                         FontFamily="{StaticResource TF2Font}"  
-                         TextWrapping="Wrap"  
-                         Margin="0,20"/>
-
-                <TextBlock Text="Item Slot: PRIMARY"   
-                         Foreground="{StaticResource TextColour}"  
-                         VerticalAlignment="Center" HorizontalAlignment="Center"  
-                         FontSize="20"  
-                         FontFamily="{StaticResource TF2Font}"  
-                         TextWrapping="Wrap"  
-                         Margin="0,20"/>
-
+                
                 <Grid Visibility="{Binding CurrentItem.ItemSet, Converter={StaticResource StringToVisibilty}}"
-                      Background="Transparent">
+                      Background="Transparent"
+				      Grid.Row="3" Grid.Column="1"
+                      Margin="0,35,0,60">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -139,11 +132,14 @@
                                Text="{Binding CurrentItem.ItemSet}"
 							   Grid.Row="0"/>
 
-                    <ListView ItemsSource="{Binding ItemsInSet}"
+                    <ListBox ItemsSource="{Binding ItemsInSet}"
                               BorderBrush="Transparent"
                               Background="Transparent"
-							  Grid.Row="1">
-                        <ListView.ItemTemplate>
+							  Grid.Row="1" 
+                              HorizontalAlignment="Center"
+                              SelectedItem="{Binding CurrentItem}">
+
+                        <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Foreground="{StaticResource TextColour}" 
                                            FontSize="20"  
@@ -151,17 +147,89 @@
                                            VerticalAlignment="Center" HorizontalAlignment="Center"
                                            Text="{Binding ItemName}"/>
                             </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
                 </Grid>
 
-                <TextBlock Text="CAPABILITIES"   
+                <TextBlock 
+                         Foreground="{StaticResource HeaderColour}"  
+                         VerticalAlignment="Center" HorizontalAlignment="Center"  
+                         FontSize="20"  
+                         FontFamily="{StaticResource TF2Font}"
+						 Grid.Row="4" Grid.Column="1">
+                    Level:
+                </TextBlock>
+
+                <TextBlock Text="{Binding CurrentItem.Level}"  
                          Foreground="{StaticResource TextColour}"  
                          VerticalAlignment="Center" HorizontalAlignment="Center"  
-                         FontSize="20"
+                         FontSize="20"  
+                         FontFamily="{StaticResource TF2Font}" 
+						 Grid.Row="5" Grid.Column="1"/>
+
+                <TextBlock Foreground="{StaticResource HeaderColour}"  
+                           VerticalAlignment="Center" HorizontalAlignment="Center"  
+                           FontSize="20"  
+                           FontFamily="{StaticResource TF2Font}" 
+                           Margin="0,60,0,10"
+						   Grid.Row="6" Grid.Column="1"
+                           Visibility="{Binding CurrentItem.ItemDescription, Converter={StaticResource StringToVisibilty}}">
+                    DESCRIPTION
+                </TextBlock>
+                
+                <TextBlock Text="{Binding CurrentItem.ItemDescription}"  
+                         Foreground="{StaticResource TextColour}"  
+                         VerticalAlignment="Center" HorizontalAlignment="Center"  
+                         FontSize="20"  
                          FontFamily="{StaticResource TF2Font}"  
                          TextWrapping="Wrap"  
-                         Margin="0,20,0,20"/>
+						 Grid.Row="7" Grid.Column="1"
+                         Margin="0,0,0,60"/>
+
+                <TextBlock 
+                         Foreground="{StaticResource HeaderColour}"  
+                         VerticalAlignment="Center" HorizontalAlignment="Center"  
+                         FontSize="20"  
+                         FontFamily="{StaticResource TF2Font}"  
+						 Grid.Row="8" Grid.Column="1">
+                    Item type:
+                </TextBlock>
+
+                <TextBlock Text="{Binding CurrentItem.ItemType}"   
+                         Foreground="{StaticResource TextColour}"  
+                         VerticalAlignment="Center" HorizontalAlignment="Center"  
+                         FontSize="20"  
+                         FontFamily="{StaticResource TF2Font}"  
+                         Margin="0,10,0,0"
+						Grid.Row="9" Grid.Column="1"/>
+
+                <TextBlock
+                         Foreground="{StaticResource HeaderColour}"  
+                         VerticalAlignment="Center" HorizontalAlignment="Center"  
+                         FontSize="20"  
+                         FontFamily="{StaticResource TF2Font}"  
+                         Margin="0,15,0,0"
+						 Grid.Row="10" Grid.Column="1">
+                    Item Slot:
+                </TextBlock>
+
+                <TextBlock Text="{Binding CurrentItem.ItemSlot}"   
+                         Foreground="{StaticResource TextColour}"  
+                         VerticalAlignment="Center" HorizontalAlignment="Center"  
+                         FontSize="20"  
+                         FontFamily="{StaticResource TF2Font}"  
+                         Margin="0,10,0,0"
+						 Grid.Row="11" Grid.Column="1"/>
+
+                <TextBlock   
+                         Foreground="{StaticResource HeaderColour}"  
+                         VerticalAlignment="Center" HorizontalAlignment="Center"  
+                         FontSize="20"
+                         FontFamily="{StaticResource TF2Font}"
+                         Margin="0,60,0,10"
+						 Grid.Row="12" Grid.Column="1">
+                    CAPABILITIES
+                </TextBlock>
 
                 <ListView HorizontalAlignment="Center"  
 					      VerticalAlignment="Center"  
@@ -169,10 +237,11 @@
                           BorderBrush="Transparent"  
                           Foreground="{StaticResource TextColour}"  
                           FontFamily="{StaticResource TF2Font}"  
-                          IsHitTestVisible="False">
+                          IsHitTestVisible="False"
+						  Grid.Row="13" Grid.Column="1">
 
                     <Grid Visibility="{Binding CurrentItem.Capabilities.CanBeGiftWrapped, Converter={StaticResource BoolToVisibility}}"
-                          Margin="0,10">
+                          Margin="0,0,0,5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -193,7 +262,7 @@
                     </Grid>
 
                     <Grid Visibility="{Binding CurrentItem.Capabilities.CanBeKillstreak, Converter={StaticResource BoolToVisibility}}"
-                          Margin="0,10">
+                          Margin="0,0,0,5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -214,7 +283,7 @@
                     </Grid>
 
                     <Grid Visibility="{Binding CurrentItem.Capabilities.CanBeStrangefied, Converter={StaticResource BoolToVisibility}}"
-                          Margin="0,10">
+                          Margin="0,0,0,5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -235,7 +304,7 @@
                     </Grid>
 
                     <Grid Visibility="{Binding CurrentItem.Capabilities.Nameable, Converter={StaticResource BoolToVisibility}}"
-                          Margin="0,10">
+                          Margin="0,0,0,5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -245,7 +314,7 @@
 							   Width="35" Height="35"
                                Grid.Column="0"/>
 
-                        <TextBlock Text="This item is renameable"  
+                        <TextBlock Text="This item can be renamed"  
                                    Foreground="{StaticResource TextColour}" 
                                    FontFamily="{StaticResource TF2Font}" 
                                    VerticalAlignment="Center" HorizontalAlignment="Center" 
@@ -256,7 +325,7 @@
                     </Grid>
 
                     <Grid Visibility="{Binding CurrentItem.Capabilities.WillAttachCrafter, Converter={StaticResource BoolToVisibility}}"
-                          Margin="0,10">
+                          Margin="0,0,0,5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -277,7 +346,7 @@
                     </Grid>
 
                 </ListView>
-            </ListView>
+            </Grid>
         </ScrollViewer>
     </Grid>
 </Page>
