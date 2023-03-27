@@ -53,6 +53,12 @@ namespace Project_TF2ItemList.Model
         [JsonProperty(PropertyName = "item_description")]
         public string ItemDescription { get; set; }         // The description of this item
 
+        [JsonIgnore]
+        public string Level
+        {
+            get { return MinimalLevel == MaximumLevel ? MinimalLevel.ToString() : $"{MinimalLevel}-{MaximumLevel}"; }
+        }
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
