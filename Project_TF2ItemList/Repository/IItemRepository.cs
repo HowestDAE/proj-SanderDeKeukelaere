@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project_TF2ItemList.Repository
 {
-    internal interface IItemRepository
+    public interface IItemRepository
     {
         Task<List<Item>> GetItems();
         Task<List<Item>> GetItems(string className);

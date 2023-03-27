@@ -34,8 +34,8 @@ namespace Project_TF2ItemList.ViewModel
             }
         }
 
-        private string _selectedClass;
         private List<string> classes;
+        private Item selectedItem;
 
         public string SelectedClass
         {
@@ -48,6 +48,16 @@ namespace Project_TF2ItemList.ViewModel
             }
         }
 
+        private string _selectedClass;
+        public Item SelectedItem
+        {
+            get { return selectedItem; }
+            set
+            {
+                selectedItem = value;
+                OnPropertyChanged(nameof(SelectedItem));
+            }
+        }
 
         public ItemOverviewVM()
         {

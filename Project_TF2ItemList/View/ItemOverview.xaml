@@ -33,7 +33,8 @@
         <ComboBox ItemsSource="{Binding Classes}" SelectedItem="{Binding SelectedClass}"/>
 
         <ListBox Grid.Row="1" ItemsSource="{Binding Items}"
-                 Background="#282624">
+                 Background="#282624"
+                 SelectedItem="{Binding SelectedItem}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ScrollContentPresenter}}}" Orientation="Horizontal"/>

@@ -91,6 +91,7 @@
     <Compile Include="Repository\LocalItemRepository.cs" />
     <Compile Include="ViewModel\ItemInspectionVM.cs" />
     <Compile Include="ViewModel\ItemOverviewVM.cs" />
+    <Compile Include="ViewModel\MainWindowVM.cs" />
     <Compile Include="View\Converters\ClassToVisibilityConverter.cs" />
     <Compile Include="View\Converters\ClassToIconConverter.cs" />
     <Compile Include="View\Converters\QualityToHexColorConverter.cs" />
