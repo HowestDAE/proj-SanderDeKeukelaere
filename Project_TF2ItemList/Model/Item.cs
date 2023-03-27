@@ -31,6 +31,9 @@ namespace Project_TF2ItemList.Model
         [JsonProperty(PropertyName = "craft_class")]
         public string ItemType { get; set; }                // What type of item is it
 
+        [JsonProperty(PropertyName = "item_set")]
+        public string ItemSet { get; set; }
+
         [JsonProperty(PropertyName = "capabilities")]
         public Capabilities Capabilities { get; set; }      // What can the user do with this item
 

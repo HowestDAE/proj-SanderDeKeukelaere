@@ -76,8 +76,6 @@ namespace Project_TF2ItemList.Repository
                 }
             });
 
-
-
             _items.RemoveRange(200, _items.Count() - 200);
 
             // Get all classes
@@ -123,6 +121,20 @@ namespace Project_TF2ItemList.Repository
                 if (item.Classes == null) continue;
 
                 if (item.Classes.Contains(className)) items.Add(item);
+            }
+
+            return items;
+        }
+
+        public async Task<List<Item>> GetItemsInSet(string itemSet)
+        {
+            await GetItems();
+
+            List<Item> items = new List<Item>();
+
+            foreach (Item item in _items)
+            {
+                if (item.ItemSet.Equals(itemSet)) items.Add(item);
             }
 
             return items;

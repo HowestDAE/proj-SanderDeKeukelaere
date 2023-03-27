@@ -12,5 +12,6 @@ namespace Project_TF2ItemList.Repository
         Task<List<Item>> GetItems();
         Task<List<Item>> GetItems(string className);
         Task<List<string>> GetClasses();
+        Task<List<Item>> GetItemsInSet(string itemSet);
     }
 }
