@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Project_TF2ItemList.Model;
 using Project_TF2ItemList.Repository;
 using System;
@@ -11,13 +12,15 @@ namespace Project_TF2ItemList.ViewModel
 {
     public class ItemOverviewVM : ObservableObject
     {
-        static public IItemRepository ItemRepository { get; set; } = new APIItemRepository/*LocalItemRepository*/();
+        static public IItemRepository ItemRepository { get; set; }
+        private APIItemRepository _apiRepository = new APIItemRepository();
+        private LocalItemRepository _localRepository = new LocalItemRepository();
 
         private List<Item> _items;
         public List<Item> Items
         {
             get { return _items; }
-            set
+            private set
             {
                 _items = value;
                 OnPropertyChanged(nameof(Items));
@@ -27,7 +30,7 @@ namespace Project_TF2ItemList.ViewModel
         public List<string> Classes
         {
             get { return classes; }
-            set
+            private set
             {
                 classes = value;
                 OnPropertyChanged(nameof(Classes));
@@ -59,23 +62,52 @@ namespace Project_TF2ItemList.ViewModel
             }
         }
 
+        private bool _isRepositoryAPI = true;
+
+        private string _repositoryButtonText = "SWITCH TO OFFLINE REPOSITORY";
+        public string RepositoryButtonText
+        {
+            get { return _repositoryButtonText; }
+            private set
+            {
+                _repositoryButtonText = value;
+                OnPropertyChanged(nameof(RepositoryButtonText));
+            }
+        }
+        public RelayCommand SwitchRepositoryCommand { get; private set; }
+
         public ItemOverviewVM()
         {
+            ItemRepository = _apiRepository;
             LoadItemsAndClasses();
+
+            SwitchRepositoryCommand = new RelayCommand(SwitchRepository);
         }
 
         private async void LoadItemsAndClasses()
         {
             Items = await ItemRepository.GetItems();
-            Classes = await ItemRepository.GetClasses();
 
-            // Add "all classes" to classes list
-            Classes.Add("<all classes>");
-            SelectedClass = Classes[Classes.Count - 1];
+            // The classes only need to be set once (otherwise "all classes" will start to be added multiple times)
+            if (Classes == null)
+            {
+                List<string> classes = await ItemRepository.GetClasses();
+
+                // Add "all classes" to classes list
+                classes.Add("<all classes>");
+                SelectedClass = classes[classes.Count - 1];
+
+                Classes = classes;
+            }
+
+            // Sort items
+            GetItems(SelectedClass);
         }
 
         private async void GetItems(string className)
         {
+            if (_selectedClass == null) return;
+
             if (_selectedClass.Equals("<all classes>"))
             {
                 Items = await ItemRepository.GetItems();
@@ -84,6 +116,21 @@ namespace Project_TF2ItemList.ViewModel
             {
                 Items = await ItemRepository.GetItems(_selectedClass);
             }
+        }
+
+        private void SwitchRepository()
+        {
+            _isRepositoryAPI = !_isRepositoryAPI;
+            if (_isRepositoryAPI)
+            {
+                ItemRepository = _apiRepository;
+            }
+            else
+            {
+                ItemRepository = _localRepository;
+            }
+            RepositoryButtonText = _isRepositoryAPI ? "SWITCH TO OFFLINE REPOSITORY" : "SWITCH TO API REPOSITORY";
+            LoadItemsAndClasses();
         }
     }
 }

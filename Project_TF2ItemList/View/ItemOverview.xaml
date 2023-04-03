@@ -30,9 +30,27 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <ComboBox ItemsSource="{Binding Classes}" SelectedItem="{Binding SelectedClass}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-        <ListBox Grid.Row="1" ItemsSource="{Binding Items}"
+        <ComboBox ItemsSource="{Binding Classes}" SelectedItem="{Binding SelectedClass}"
+                  Grid.Row="0" Grid.Column="0"/>
+
+        <Button Grid.Row="0" Grid.Column="3" 
+                FontFamily="{StaticResource TF2Font}"
+                FontSize="20"
+                Foreground="{StaticResource TextColour}"
+                Background="#3C352E"
+                Command="{Binding SwitchRepositoryCommand}"
+                Content="{Binding RepositoryButtonText}">
+        </Button>
+
+        <ListBox Grid.Row="1" Grid.ColumnSpan="4"
+                 ItemsSource="{Binding Items}"
                  Background="#282624"
                  SelectedItem="{Binding SelectedItem}">
             <ListBox.ItemsPanel>
