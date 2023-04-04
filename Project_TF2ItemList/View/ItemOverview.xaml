@@ -38,7 +38,25 @@
         </Grid.ColumnDefinitions>
 
         <ComboBox ItemsSource="{Binding Classes}" SelectedItem="{Binding SelectedClass}"
+                  FontFamily="{StaticResource TF2Font}"
+                  VerticalContentAlignment="Center"
+                  HorizontalContentAlignment="Center"
+                  Foreground="#3C352E"
                   Grid.Row="0" Grid.Column="0"/>
+
+        <ComboBox ItemsSource="{Binding ItemTypes}" SelectedItem="{Binding SelectedItemType}"
+                  FontFamily="{StaticResource TF2Font}"
+                  VerticalContentAlignment="Center"
+                  HorizontalContentAlignment="Center"
+                  Foreground="#3C352E"
+                  Grid.Row="0" Grid.Column="1"/>
+
+        <ComboBox ItemsSource="{Binding ItemSlots}" SelectedItem="{Binding SelectedItemSlot}"
+                  FontFamily="{StaticResource TF2Font}"
+                  VerticalContentAlignment="Center"
+                  HorizontalContentAlignment="Center"
+                  Foreground="#3C352E"
+                  Grid.Row="0" Grid.Column="2"/>
 
         <Button Grid.Row="0" Grid.Column="3" 
                 FontFamily="{StaticResource TF2Font}"

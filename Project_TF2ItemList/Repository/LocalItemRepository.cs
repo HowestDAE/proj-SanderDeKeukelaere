@@ -13,6 +13,8 @@ namespace Project_TF2ItemList.Repository
     {
         private List<Item> _items;
         private List<string> _classes = new List<string>();
+        private List<string> _itemTypes = new List<string>();
+        private List<string> _itemSlots = new List<string>();
 
         public async Task<List<Item>> GetItems()
         {
@@ -91,20 +93,6 @@ namespace Project_TF2ItemList.Repository
             return _items;
         }
 
-        public async Task<List<Item>> GetItems(string className)
-        {
-            await GetItems();
-
-            List<Item> items = new List<Item>();
-
-            foreach(Item item in _items)
-            {
-                if (item.Classes.Contains(className)) items.Add(item);
-            }
-
-            return items;
-        }
-
         public async Task<List<string>> GetClasses()
         {
             await GetItems();
@@ -126,6 +114,44 @@ namespace Project_TF2ItemList.Repository
             }
 
             return items;
+        }
+
+        public async Task<List<string>> GetItemTypes()
+        {
+            await GetItems();
+
+            _itemTypes = new List<string>();
+
+            foreach (Item item in _items)
+            {
+                if (item.ItemType == null) continue;
+
+                if (!_itemTypes.Contains(item.ItemType))
+                {
+                    _itemTypes.Add(item.ItemType);
+                }
+            }
+
+            return _itemTypes;
+        }
+
+        public async Task<List<string>> GetItemSlots()
+        {
+            await GetItems();
+
+            _itemSlots = new List<string>();
+
+            foreach (Item item in _items)
+            {
+                if (item.ItemSlot == null) continue;
+
+                if (!_itemSlots.Contains(item.ItemSlot))
+                {
+                    _itemSlots.Add(item.ItemSlot);
+                }
+            }
+
+            return _itemSlots;
         }
     }
 }

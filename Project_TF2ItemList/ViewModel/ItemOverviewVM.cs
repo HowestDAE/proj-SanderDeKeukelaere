@@ -27,37 +27,82 @@ namespace Project_TF2ItemList.ViewModel
             }
         }
 
+        private List<string> _classes;
         public List<string> Classes
         {
-            get { return classes; }
+            get { return _classes; }
             private set
             {
-                classes = value;
+                _classes = value;
                 OnPropertyChanged(nameof(Classes));
             }
         }
 
-        private List<string> classes;
-        private Item selectedItem;
+        private List<string> _itemTypes;
+        public List<string> ItemTypes
+        {
+            get { return _itemTypes; }
+            private set
+            {
+                _itemTypes = value;
+                OnPropertyChanged(nameof(ItemTypes));
+            }
+        }
 
+        private List<string> _itemSlots;
+        public List<string> ItemSlots
+        {
+            get { return _itemSlots; }
+            private set
+            {
+                _itemSlots = value;
+                OnPropertyChanged(nameof(ItemSlots));
+            }
+        }
+
+        private string _selectedClass;
         public string SelectedClass
         {
             get { return _selectedClass; }
             set
             {
                 _selectedClass = value;
-                GetItems(_selectedClass);
+                RefreshItemFiltering();
                 OnPropertyChanged(nameof(SelectedClass));
             }
         }
 
-        private string _selectedClass;
-        public Item SelectedItem
+        private string _selectedItemType;
+        public string SelectedItemType
         {
-            get { return selectedItem; }
+            get { return _selectedItemType; }
             set
             {
-                selectedItem = value;
+                _selectedItemType = value;
+                RefreshItemFiltering();
+                OnPropertyChanged(nameof(SelectedItemType));
+            }
+        }
+
+        private string _selectedItemSlot;
+        public string SelectedItemSlot
+        {
+            get { return _selectedItemSlot; }
+            set
+            {
+                _selectedItemSlot = value;
+                RefreshItemFiltering();
+                OnPropertyChanged(nameof(SelectedItemSlot));
+            }
+        }
+
+        private Item _selectedItem;
+        public Item SelectedItem
+        {
+            get { return _selectedItem; }
+            set
+            {
+                _selectedItem = value;
                 OnPropertyChanged(nameof(SelectedItem));
             }
         }
@@ -84,6 +129,14 @@ namespace Project_TF2ItemList.ViewModel
             SwitchRepositoryCommand = new RelayCommand(SwitchRepository);
         }
 
+        private async void RefreshItemFiltering()
+        {
+            Items = await ItemRepository.GetItems();
+            GetItemsByClass();
+            GetItemsByType();
+            GetItemsBySlot();
+        }
+
         private async void LoadItemsAndClasses()
         {
             Items = await ItemRepository.GetItems();
@@ -100,21 +153,77 @@ namespace Project_TF2ItemList.ViewModel
                 Classes = classes;
             }
 
+            List<string> itemTypes = await ItemRepository.GetItemTypes();
+            // Add "all classes" to itemtypes list
+            itemTypes.Add("<all item types>");
+            SelectedItemType = itemTypes[itemTypes.Count - 1];
+            ItemTypes = itemTypes;
+
+
+            List<string> itemSlots = await ItemRepository.GetItemSlots();
+            // Add "all classes" to itemslots list
+            itemSlots.Add("<all item slots>");
+            SelectedItemSlot = itemSlots[itemSlots.Count - 1];
+            ItemSlots = itemSlots;
+
             // Sort items
-            GetItems(SelectedClass);
+            RefreshItemFiltering();
         }
 
-        private async void GetItems(string className)
+        private void GetItemsByClass()
         {
             if (_selectedClass == null) return;
 
-            if (_selectedClass.Equals("<all classes>"))
+            if (!_selectedClass.Equals("<all classes>"))
             {
-                Items = await ItemRepository.GetItems();
+                List<Item> items = new List<Item>();
+
+                foreach (Item item in _items)
+                {
+                    if (item.Classes == null) continue;
+
+                    if (item.Classes.Contains(_selectedClass)) items.Add(item);
+                }
+
+                Items = items;
             }
-            else
+        }
+
+        private void GetItemsByType()
+        {
+            if (_selectedItemType == null) return;
+
+            if (!_selectedItemType.Equals("<all item types>"))
             {
-                Items = await ItemRepository.GetItems(_selectedClass);
+                List<Item> items = new List<Item>();
+
+                foreach (Item item in _items)
+                {
+                    if (item.ItemType == null) continue;
+
+                    if (item.ItemType.Equals(_selectedItemType)) items.Add(item);
+                }
+
+                Items = items;
+            }
+        }
+
+        private void GetItemsBySlot()
+        {
+            if (_selectedItemSlot == null) return;
+
+            if (!_selectedItemSlot.Equals("<all item slots>"))
+            {
+                List<Item> items = new List<Item>();
+
+                foreach (Item item in _items)
+                {
+                    if (item.ItemSlot == null) continue;
+
+                    if (item.ItemSlot.Equals(_selectedItemSlot)) items.Add(item);
+                }
+
+                Items = items;
             }
         }
 
