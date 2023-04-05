@@ -28,12 +28,12 @@ namespace Project_TF2ItemList.Model
         [JsonProperty(PropertyName = "image_url")]
         public string ImageUrl { get; set; }                // Url to the image of the item
 
-        [JsonProperty(PropertyName = "craft_class")]
+        [JsonProperty(PropertyName = "item_type_name")]
         public string ItemType { get; set; }                // What type of item is it
 
         private string _itemSet;
         [JsonProperty(PropertyName = "item_set")]
-        public string ItemSet
+        public string ItemSet                               // What set is this item part of
         {
             get
             {
@@ -48,7 +48,7 @@ namespace Project_TF2ItemList.Model
         public Capabilities Capabilities { get; set; }      // What can the user do with this item
 
         [JsonProperty(PropertyName = "used_by_classes")]
-        public List<string> Classes { get; set; }               // Which classes use this item
+        public List<string> Classes { get; set; }           // Which classes use this item
 
         [JsonProperty(PropertyName = "item_description")]
         public string ItemDescription { get; set; }         // The description of this item
