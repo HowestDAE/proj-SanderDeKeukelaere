@@ -7,7 +7,7 @@
         xmlns:view="clr-namespace:Project_TF2ItemList.View"
         xmlns:vm="clr-namespace:Project_TF2ItemList.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Width="1475" Height="720">
+        Title="MainWindow" Width="1237" Height="720">
 
     <Window.DataContext>
         <vm:MainWindowVM/>

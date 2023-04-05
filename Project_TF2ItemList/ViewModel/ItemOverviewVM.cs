@@ -153,6 +153,17 @@ namespace Project_TF2ItemList.ViewModel
                 Classes = classes;
             }
 
+            // Items with no classes assigned, should have all classes
+            List<string> classesWithoutAllFilter = new List<string>(Classes);
+            classesWithoutAllFilter.RemoveAt(classesWithoutAllFilter.Count - 1);
+            foreach (Item item in Items)
+            {
+                if (item.Classes != null && item.Classes.Count() > 0) continue;
+                if (item.ItemSlot == null) continue; // Item should be equipable
+
+                item.Classes = classesWithoutAllFilter;
+            }
+
             List<string> itemTypes = await ItemRepository.GetItemTypes();
             // Add "all classes" to itemtypes list
             itemTypes.Add("<all item types>");
