@@ -10,8 +10,23 @@ namespace Project_TF2ItemList.Model
 {
     public class Item
     {
+        private string _itemName;
         [JsonProperty(PropertyName = "item_name")]
-        public string ItemName { get; set; }                // The actual name of the weapon
+        public string ItemName                              // The actual name of the weapon
+        {
+            get 
+            {
+                if (HasProperName)
+                {
+                    if (!_itemName.StartsWith("The"))
+                    {
+                        _itemName = $"The {_itemName}";
+                    }
+                }
+                return _itemName; 
+            }
+            set { _itemName = value; }
+        }
 
         [JsonProperty(PropertyName = "item_slot")]
         public string ItemSlot { get; set; }                // Which slot does this item go into
