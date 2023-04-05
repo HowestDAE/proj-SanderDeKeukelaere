@@ -53,6 +53,18 @@ namespace Project_TF2ItemList.Model
         [JsonProperty(PropertyName = "item_description")]
         public string ItemDescription { get; set; }         // The description of this item
 
+        [JsonProperty(PropertyName = "craft_class")]
+        public string CraftClass { get; set; }              // How can this item be used in crafting
+
+        [JsonProperty(PropertyName = "holiday_restriction")]
+        public string HolidayRestriction { get; set; }      // Does this item have an holiday restriction
+
+        [JsonProperty(PropertyName = "tool")]
+        public string ItemPurpose { get; set; }
+
+        [JsonProperty(PropertyName = "proper_name")]
+        public bool HasProperName { get; set; }
+
         [JsonIgnore]
         public string Level
         {
