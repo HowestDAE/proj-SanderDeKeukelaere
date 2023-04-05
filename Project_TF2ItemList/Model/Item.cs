@@ -59,7 +59,7 @@ namespace Project_TF2ItemList.Model
         [JsonProperty(PropertyName = "holiday_restriction")]
         public string HolidayRestriction { get; set; }      // Does this item have an holiday restriction
 
-        [JsonProperty(PropertyName = "tool")]
+        [JsonProperty(PropertyName = "tool.type")]
         public string ItemPurpose { get; set; }
 
         [JsonProperty(PropertyName = "proper_name")]
