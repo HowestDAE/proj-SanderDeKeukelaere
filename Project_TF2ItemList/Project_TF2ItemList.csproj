@@ -97,7 +97,9 @@
     <Compile Include="View\Converters\QualityToHexColorConverter.cs" />
     <Compile Include="View\Converters\QualityToNameConverter.cs" />
     <Compile Include="View\Converters\QualityToImageConverter.cs" />
+    <Compile Include="View\Converters\NullToVisibilityConverter.cs" />
     <Compile Include="View\Converters\StringToVisibilityConverter.cs" />
+    <Compile Include="View\Converters\StringToVisibilityInvertedConverter.cs" />
     <Compile Include="View\ItemInspection.xaml.cs">
       <DependentUpon>ItemInspection.xaml</DependentUpon>
     </Compile>

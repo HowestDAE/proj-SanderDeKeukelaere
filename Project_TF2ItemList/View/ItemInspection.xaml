@@ -25,7 +25,9 @@
         <convert:QualityToNameConverter x:Key="QualityToName"/>
         <convert:QualityToHexColorConverter x:Key="QualityToHexColor"/>
         <convert:BoolToVisibilityConverter x:Key="BoolToVisibility"/>
-        <convert:StringToVisibilityConverter x:Key="StringToVisibilty"/>
+        <convert:NullToVisibilityConverter x:Key="NullToVisibility"/>
+        <convert:StringToVisibilityConverter x:Key="StringToVisibility"/>
+        <convert:StringToVisibilityInvertedConverter x:Key="StringToVisibilityInverted"/>
     </Page.Resources>
 
     <Grid>
@@ -83,7 +85,7 @@
                 <Grid Grid.Row="1"
                       Background="Transparent"
                       Margin="0,0,0,50"
-                      Visibility="{Binding CurrentItem.ItemSet, Converter={StaticResource StringToVisibilty}}">
+                      Visibility="{Binding CurrentItem.ItemSet, Converter={StaticResource StringToVisibility}}">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -115,11 +117,21 @@
                     </ListBox>
                 </Grid>
 
+                <TextBlock Grid.Row="1"
+                           Foreground="#E4FB70" 
+                           Margin="0,0,0,50"
+                           TextAlignment="Center"
+                           FontSize="20"  
+                           FontFamily="{StaticResource TF2Font}"
+                           Visibility="{Binding CurrentItem.ItemSet, Converter={StaticResource StringToVisibilityInverted}}">
+                    This item is not part of a set
+                </TextBlock>
+
                 <TextBlock Grid.Row="2"
                            Foreground="{StaticResource HeaderColour}"  
                            Margin="0,0,0,5"
                            TextAlignment="Center"
-                           Visibility="{Binding CurrentItem.ItemDescription, Converter={StaticResource StringToVisibilty}}"  
+                           Visibility="{Binding CurrentItem.ItemDescription, Converter={StaticResource StringToVisibility}}"  
                            FontSize="20"  
                            FontFamily="{StaticResource TF2Font}">
                     DESCRIPTION
@@ -130,7 +142,7 @@
                            Margin="0,0,0,50"  
                            Width="700"
                            TextAlignment="Center"
-                           Visibility="{Binding CurrentItem.ItemDescription, Converter={StaticResource StringToVisibilty}}"  
+                           Visibility="{Binding CurrentItem.ItemDescription, Converter={StaticResource StringToVisibility}}"  
                            Text="{Binding CurrentItem.ItemDescription}"  
                            FontSize="20"  
                            FontFamily="{StaticResource TF2Font}"  
@@ -215,7 +227,7 @@
                               Margin="0,50,0,0"
                               HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                               IsHitTestVisible="False"
-                              Visibility="{Binding CurrentItem.ItemPurpose.PurposeName, Converter={StaticResource StringToVisibilty}}">
+                              Visibility="{Binding CurrentItem.ItemPurpose, Converter={StaticResource NullToVisibility}}">
 
                         <TextBlock Foreground="{StaticResource HeaderColour}"  
                                    Margin="0,0,0,0"
@@ -239,7 +251,8 @@
                               Background="Transparent" BorderBrush="Transparent"
                               Margin="0,0,0,0"
                               HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                              IsHitTestVisible="False">
+                              IsHitTestVisible="False"
+                              Visibility="{Binding CurrentItem.CraftClass, Converter={StaticResource StringToVisibility}}">
 
                         <TextBlock Foreground="{StaticResource HeaderColour}"  
                                    Margin="0,0,0,0"
@@ -258,11 +271,22 @@
                         </TextBlock>
                     </ListView>
 
+                    <TextBlock Grid.Column="1" Grid.Row="0"
+                               Foreground="{StaticResource TextColour}"  
+                               Margin="0,25,0,0"
+                               TextAlignment="Center"
+                               FontSize="20"  
+                               FontFamily="{StaticResource TF2Font}"
+                               Visibility="{Binding CurrentItem.CraftClass, Converter={StaticResource StringToVisibilityInverted}}">
+                        Can not be used in crafting
+                    </TextBlock>
+
                     <ListView Grid.Column="1" Grid.Row="1"
                               Background="Transparent" BorderBrush="Transparent"
                               Margin="0,50,0,0"
                               HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                              IsHitTestVisible="False">
+                              IsHitTestVisible="False"
+                              Visibility="{Binding CurrentItem.HolidayRestriction, Converter={StaticResource StringToVisibility}}">
 
                         <TextBlock Foreground="{StaticResource HeaderColour}"  
                                    Margin="0,0,0,0"
@@ -280,6 +304,16 @@
                                    FontFamily="{StaticResource TF2Font}">
                         </TextBlock>
                     </ListView>
+
+                    <TextBlock Grid.Column="1" Grid.Row="1"
+                               Foreground="{StaticResource TextColour}"  
+                               Margin="0,75,0,0"
+                               TextAlignment="Center"
+                               FontSize="20"  
+                               FontFamily="{StaticResource TF2Font}"
+                               Visibility="{Binding CurrentItem.HolidayRestriction, Converter={StaticResource StringToVisibilityInverted}}">
+                        Does not have a holiday restriction
+                    </TextBlock>
 
                     <ListView Grid.Column="1" Grid.Row="2"
                               Background="Transparent" BorderBrush="Transparent"
