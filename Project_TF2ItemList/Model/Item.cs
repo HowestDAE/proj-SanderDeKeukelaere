@@ -1,13 +1,31 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace Project_TF2ItemList.Model
 {
+    public class Purpose
+    {
+        private string _purposeName;
+
+        [JsonProperty(PropertyName = "type")]
+        public string PurposeName
+        {
+            get 
+            {
+                if (_purposeName != null) _purposeName = _purposeName.Replace('_', ' ');
+                return _purposeName;
+            }
+            set { _purposeName = value; }
+        }
+    }
+
     public class Item
     {
         private string _itemName;
@@ -71,19 +89,34 @@ namespace Project_TF2ItemList.Model
         [JsonProperty(PropertyName = "craft_class")]
         public string CraftClass { get; set; }              // How can this item be used in crafting
 
+        private string _holidayRestriction;
         [JsonProperty(PropertyName = "holiday_restriction")]
-        public string HolidayRestriction { get; set; }      // Does this item have an holiday restriction
+        public string HolidayRestriction                    // Does this item have an holiday restriction
+        {
+            get
+            {
+                if (_holidayRestriction != null) _holidayRestriction = _holidayRestriction.Replace('_', ' ');
+                return _holidayRestriction; 
+            }
+            set { _holidayRestriction = value; }
+        }
 
-        [JsonProperty(PropertyName = "tool.type")]
-        public string ItemPurpose { get; set; }
+        [JsonProperty(PropertyName = "tool")]
+        public Purpose ItemPurpose { get; set; }            // What can this item be used for
 
         [JsonProperty(PropertyName = "proper_name")]
-        public bool HasProperName { get; set; }
+        public bool HasProperName { get; set; }             // Should the display name of this item start with "the"
 
         [JsonIgnore]
         public string Level
         {
             get { return MinimalLevel == MaximumLevel ? MinimalLevel.ToString() : $"{MinimalLevel}-{MaximumLevel}"; }
+        }
+
+        [JsonIgnore]
+        public string SubTitle
+        {
+            get { return $"Level {Level} {ItemType}"; }
         }
 
         public override string ToString()

@@ -50,76 +50,40 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="600"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+                <ListView Grid.Row="0"
+                          Background="Transparent" BorderBrush="Transparent"
+                          Margin="0,50,0,50"
+                          HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                          IsHitTestVisible="False">
+                    <TextBlock Text="{Binding CurrentItem.ItemQuality, Converter={StaticResource QualityToName}}"  
+                               Foreground="{Binding CurrentItem.ItemQuality, Converter={StaticResource QualityToHexColor}}" 
+                               TextAlignment="Center"
+                               FontSize="20" 
+                               FontFamily="{StaticResource TF2Font}"/>
 
-                <TextBlock Text="{Binding CurrentItem.ItemQuality, Converter={StaticResource QualityToName}}"  
-                        Foreground="{Binding CurrentItem.ItemQuality, Converter={StaticResource QualityToHexColor}}" 
-                        VerticalAlignment="Center" HorizontalAlignment="Center" 
-                        FontSize="20" 
-                        FontFamily="{StaticResource TF2Font}" 
-                        TextWrapping="Wrap" 
-                        Margin="0,0,0,0"
-						Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock Text="{Binding CurrentItem.ItemName}"   
+                               Foreground="{Binding CurrentItem.ItemQuality, Converter={StaticResource QualityToHexColor}}"
+                               TextAlignment="Center"
+                               FontSize="30"  
+                               FontFamily="{StaticResource TF2Font}"/>
 
-                <TextBlock Text="{Binding CurrentItem.ItemName}"   
-                         Foreground="{StaticResource TextColour}"  
-                         VerticalAlignment="Center" HorizontalAlignment="Center"  
-                         FontSize="20"  
-                         FontFamily="{StaticResource TF2Font}"  
-                         TextWrapping="Wrap"  
-                         Margin="0,5,0,0"
-						 Grid.Row="1" Grid.Column="1"/>
-
-                <ListView ItemsSource="{Binding CurrentItem.Classes}"  
-                        HorizontalAlignment="Center"  
-					    VerticalAlignment="Center"  
-                        Background="Transparent"  
-                        BorderBrush="Transparent"  
-                        Foreground="{StaticResource TextColour}"  
-                        FontFamily="{StaticResource TF2Font}"  
-                        IsHitTestVisible="False"  
-                        Margin="0,35,0,35"
-						Grid.Row="2" Grid.Column="1"
-                        VerticalContentAlignment="Center">
-
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal"/>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding Converter={StaticResource ClassToIcon}}"  
-							     Width="45" Height="45"/>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
+                    <TextBlock Text="{Binding CurrentItem.SubTitle}"
+                               TextAlignment="Center"
+                               FontSize="20"  
+                               FontFamily="{StaticResource TF2Font}"
+                               Foreground="{StaticResource HeaderColour}"/>
                 </ListView>
-                
-                <Grid Visibility="{Binding CurrentItem.ItemSet, Converter={StaticResource StringToVisibilty}}"
+
+                <Grid Grid.Row="1"
                       Background="Transparent"
-				      Grid.Row="3" Grid.Column="1"
-                      Margin="0,35,0,60">
+                      Margin="0,0,0,50"
+                      Visibility="{Binding CurrentItem.ItemSet, Converter={StaticResource StringToVisibilty}}">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -128,224 +92,325 @@
                     <TextBlock Foreground="#E4FB70" 
                                FontSize="20"  
                                FontFamily="{StaticResource TF2Font}" 
-                               VerticalAlignment="Center" HorizontalAlignment="Center"
+                               TextAlignment="Center"
                                Text="{Binding CurrentItem.ItemSet}"
 							   Grid.Row="0"/>
 
                     <ListBox ItemsSource="{Binding ItemsInSet}"
-                              BorderBrush="Transparent"
-                              Background="Transparent"
-							  Grid.Row="1" 
-                              HorizontalAlignment="Center"
-                              SelectedItem="{Binding CurrentItem}">
+                             BorderBrush="Transparent"
+                             Background="Transparent"
+							 Grid.Row="1" 
+                             HorizontalAlignment="Center"
+                             SelectedItem="{Binding CurrentItem}">
 
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Foreground="{StaticResource TextColour}" 
                                            FontSize="20"  
                                            FontFamily="{StaticResource TF2Font}" 
-                                           VerticalAlignment="Center" HorizontalAlignment="Center"
+                                           TextAlignment="Center"
                                            Text="{Binding ItemName}"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </Grid>
 
-                <TextBlock 
-                         Foreground="{StaticResource HeaderColour}"  
-                         VerticalAlignment="Center" HorizontalAlignment="Center"  
-                         FontSize="20"  
-                         FontFamily="{StaticResource TF2Font}"
-						 Grid.Row="4" Grid.Column="1">
-                    Level:
-                </TextBlock>
-
-                <TextBlock Text="{Binding CurrentItem.Level}"  
-                         Foreground="{StaticResource TextColour}"  
-                         VerticalAlignment="Center" HorizontalAlignment="Center"  
-                         FontSize="20"  
-                         FontFamily="{StaticResource TF2Font}" 
-						 Grid.Row="5" Grid.Column="1"/>
-
-                <TextBlock Foreground="{StaticResource HeaderColour}"  
-                           VerticalAlignment="Center" HorizontalAlignment="Center"  
+                <TextBlock Grid.Row="2"
+                           Foreground="{StaticResource HeaderColour}"  
+                           Margin="0,0,0,5"
+                           TextAlignment="Center"
+                           Visibility="{Binding CurrentItem.ItemDescription, Converter={StaticResource StringToVisibilty}}"  
                            FontSize="20"  
-                           FontFamily="{StaticResource TF2Font}" 
-                           Margin="0,60,0,10"
-						   Grid.Row="6" Grid.Column="1"
-                           Visibility="{Binding CurrentItem.ItemDescription, Converter={StaticResource StringToVisibilty}}">
+                           FontFamily="{StaticResource TF2Font}">
                     DESCRIPTION
                 </TextBlock>
+
+                <TextBlock Grid.Row="3" 
+                           Foreground="{StaticResource TextColour}"
+                           Margin="0,0,0,50"  
+                           Width="700"
+                           TextAlignment="Center"
+                           Visibility="{Binding CurrentItem.ItemDescription, Converter={StaticResource StringToVisibilty}}"  
+                           Text="{Binding CurrentItem.ItemDescription}"  
+                           FontSize="20"  
+                           FontFamily="{StaticResource TF2Font}"  
+                           TextWrapping="Wrap"/>
+
+                <Grid Grid.Row="4">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0" Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0"
+                                   Foreground="{StaticResource HeaderColour}"  
+                                   Margin="0,0,0,0"
+                                   TextAlignment="Center"
+                                   FontSize="20"  
+                                   FontFamily="{StaticResource TF2Font}">
+                            Used by
+                        </TextBlock>
+
+                        <ListView ItemsSource="{Binding CurrentItem.Classes}"
+                                  Grid.Row="1"
+                                  Margin="0,5,0,0"
+                                  Background="Transparent"
+                                  BorderBrush="Transparent"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center"
+                                  IsHitTestVisible="False"
+                                  VerticalContentAlignment="Center">
+
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Image Source="{Binding Converter={StaticResource ClassToIcon}}"  
+							     Width="45" Height="45"/>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+
+                    <ListView Grid.Column="0" Grid.Row="1"
+                              Background="Transparent" BorderBrush="Transparent"
+                              Margin="0,50,0,0"
+                              HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                              IsHitTestVisible="False">
+
+                        <TextBlock Foreground="{StaticResource HeaderColour}"  
+                                   Margin="0,0,0,0"
+                                   TextAlignment="Center"
+                                   FontSize="20"  
+                                   FontFamily="{StaticResource TF2Font}">
+                            Item Slot
+                        </TextBlock>
+
+                        <TextBlock Foreground="{StaticResource TextColour}"
+                                   Margin="0,10,0,0"
+                                   Text="{Binding CurrentItem.ItemSlot}"
+                                   TextAlignment="Center"
+                                   FontSize="20"  
+                                   FontFamily="{StaticResource TF2Font}">
+                        </TextBlock>
+                    </ListView>
+
+                    <ListView Grid.Column="0" Grid.Row="2"
+                              Background="Transparent" BorderBrush="Transparent"
+                              Margin="0,50,0,0"
+                              HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                              IsHitTestVisible="False"
+                              Visibility="{Binding CurrentItem.ItemPurpose.PurposeName, Converter={StaticResource StringToVisibilty}}">
+
+                        <TextBlock Foreground="{StaticResource HeaderColour}"  
+                                   Margin="0,0,0,0"
+                                   TextAlignment="Center"
+                                   FontSize="20"  
+                                   FontFamily="{StaticResource TF2Font}">
+                            Can be used as a
+                        </TextBlock>
+
+                        <TextBlock Foreground="{StaticResource TextColour}"
+                                   Margin="0,10,0,0"
+                                   Text="{Binding CurrentItem.ItemPurpose.PurposeName}"
+                                   TextAlignment="Center"
+                                   FontSize="20"  
+                                   FontFamily="{StaticResource TF2Font}">
+                        </TextBlock>
+                    </ListView>
+
+
+                    <ListView Grid.Column="1" Grid.Row="0"
+                              Background="Transparent" BorderBrush="Transparent"
+                              Margin="0,0,0,0"
+                              HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                              IsHitTestVisible="False">
+
+                        <TextBlock Foreground="{StaticResource HeaderColour}"  
+                                   Margin="0,0,0,0"
+                                   TextAlignment="Center"
+                                   FontSize="20"  
+                                   FontFamily="{StaticResource TF2Font}">
+                            Can be used in crafting as
+                        </TextBlock>
+
+                        <TextBlock Foreground="{StaticResource TextColour}"
+                                   Margin="0,10,0,0"
+                                   Text="{Binding CurrentItem.CraftClass}"
+                                   TextAlignment="Center"
+                                   FontSize="20"  
+                                   FontFamily="{StaticResource TF2Font}">
+                        </TextBlock>
+                    </ListView>
+
+                    <ListView Grid.Column="1" Grid.Row="1"
+                              Background="Transparent" BorderBrush="Transparent"
+                              Margin="0,50,0,0"
+                              HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                              IsHitTestVisible="False">
+
+                        <TextBlock Foreground="{StaticResource HeaderColour}"  
+                                   Margin="0,0,0,0"
+                                   TextAlignment="Center"
+                                   FontSize="20"  
+                                   FontFamily="{StaticResource TF2Font}">
+                            Can only be used during
+                        </TextBlock>
+
+                        <TextBlock Foreground="{StaticResource TextColour}"
+                                   Margin="0,10,0,0"
+                                   Text="{Binding CurrentItem.HolidayRestriction}"
+                                   TextAlignment="Center"
+                                   FontSize="20"  
+                                   FontFamily="{StaticResource TF2Font}">
+                        </TextBlock>
+                    </ListView>
+
+                    <ListView Grid.Column="1" Grid.Row="2"
+                              Background="Transparent" BorderBrush="Transparent"
+                              Margin="0,50,0,0"
+                              HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                              IsHitTestVisible="False">
+
+                        <TextBlock Foreground="{StaticResource HeaderColour}"  
+                                   Margin="0,0,0,0"
+                                   TextAlignment="Center"
+                                   FontSize="20"  
+                                   FontFamily="{StaticResource TF2Font}">
+                            User Capabilities
+                        </TextBlock>
+
+                        <ListView Background="Transparent"  
+                                  BorderBrush="Transparent"  
+                                  Foreground="{StaticResource TextColour}"  
+                                  Margin="0,10,0,0"
+                                  IsHitTestVisible="False">
+
+                            <Grid Visibility="{Binding CurrentItem.Capabilities.CanBeGiftWrapped, Converter={StaticResource BoolToVisibility}}"
+                          Margin="0,0,0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Source="pack://Application:,,,/Resources/Symbols/Checkmark.png" 
+							   Width="35" Height="35"
+                               Grid.Column="0"/>
+
+                                <TextBlock Text="This item can be giftwrapped"  
+                                   Foreground="{StaticResource TextColour}" 
+                                   FontFamily="{StaticResource TF2Font}" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                   FontSize="20" 
+                                   TextWrapping="Wrap"
+                                   Grid.Column="1"
+                                   Margin="20,0,0,0"/>
+                            </Grid>
+
+                            <Grid Visibility="{Binding CurrentItem.Capabilities.CanBeKillstreak, Converter={StaticResource BoolToVisibility}}"
+                          Margin="0,0,0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Source="pack://Application:,,,/Resources/Symbols/Checkmark.png" 
+							   Width="35" Height="35"
+                               Grid.Column="0"/>
+
+                                <TextBlock Text="This item can have a killstreak kit applied"  
+                                   Foreground="{StaticResource TextColour}" 
+                                   FontFamily="{StaticResource TF2Font}" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                   FontSize="20" 
+                                   TextWrapping="Wrap"
+                                   Grid.Column="1"
+                                   Margin="20,0,0,0"/>
+                            </Grid>
+
+                            <Grid Visibility="{Binding CurrentItem.Capabilities.CanBeStrangefied, Converter={StaticResource BoolToVisibility}}"
+                          Margin="0,0,0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Source="pack://Application:,,,/Resources/Symbols/Checkmark.png" 
+							   Width="35" Height="35"
+                               Grid.Column="0"/>
+
+                                <TextBlock Text="This item can be strangefied"  
+                                   Foreground="{StaticResource TextColour}" 
+                                   FontFamily="{StaticResource TF2Font}" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                   FontSize="20" 
+                                   TextWrapping="Wrap"
+                                   Grid.Column="1"
+                                   Margin="20,0,0,0"/>
+                            </Grid>
+
+                            <Grid Visibility="{Binding CurrentItem.Capabilities.Nameable, Converter={StaticResource BoolToVisibility}}"
+                          Margin="0,0,0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Source="pack://Application:,,,/Resources/Symbols/Checkmark.png" 
+							   Width="35" Height="35"
+                               Grid.Column="0"/>
+
+                                <TextBlock Text="This item can be renamed"  
+                                   Foreground="{StaticResource TextColour}" 
+                                   FontFamily="{StaticResource TF2Font}" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                   FontSize="20" 
+                                   TextWrapping="Wrap"
+                                   Grid.Column="1"
+                                   Margin="20,0,0,0"/>
+                            </Grid>
+
+                            <Grid Visibility="{Binding CurrentItem.Capabilities.WillAttachCrafter, Converter={StaticResource BoolToVisibility}}"
+                          Margin="0,0,0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image Source="pack://Application:,,,/Resources/Symbols/Checkmark.png" 
+							   Width="35" Height="35"
+                               Grid.Column="0"/>
+
+                                <TextBlock Text="This item will attach the crafter's name"  
+                                   Foreground="{StaticResource TextColour}" 
+                                   FontFamily="{StaticResource TF2Font}" 
+                                   VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                   FontSize="20" 
+                                   TextWrapping="Wrap"
+                                   Grid.Column="1"
+                                   Margin="20,0,0,0"/>
+                            </Grid>
+
+                        </ListView>
+                    </ListView>
+
+                </Grid>
                 
-                <TextBlock Text="{Binding CurrentItem.ItemDescription}"  
-                         Foreground="{StaticResource TextColour}"  
-                         VerticalAlignment="Center" HorizontalAlignment="Center"  
-                         FontSize="20"  
-                         FontFamily="{StaticResource TF2Font}"  
-                         TextWrapping="Wrap"  
-						 Grid.Row="7" Grid.Column="1"
-                         Margin="0,0,0,60"/>
-
-                <TextBlock 
-                         Foreground="{StaticResource HeaderColour}"  
-                         VerticalAlignment="Center" HorizontalAlignment="Center"  
-                         FontSize="20"  
-                         FontFamily="{StaticResource TF2Font}"  
-						 Grid.Row="8" Grid.Column="1">
-                    Item type:
-                </TextBlock>
-
-                <TextBlock Text="{Binding CurrentItem.ItemType}"   
-                         Foreground="{StaticResource TextColour}"  
-                         VerticalAlignment="Center" HorizontalAlignment="Center"  
-                         FontSize="20"  
-                         FontFamily="{StaticResource TF2Font}"  
-                         Margin="0,10,0,0"
-						Grid.Row="9" Grid.Column="1"/>
-
-                <TextBlock
-                         Foreground="{StaticResource HeaderColour}"  
-                         VerticalAlignment="Center" HorizontalAlignment="Center"  
-                         FontSize="20"  
-                         FontFamily="{StaticResource TF2Font}"  
-                         Margin="0,15,0,0"
-						 Grid.Row="10" Grid.Column="1">
-                    Item Slot:
-                </TextBlock>
-
-                <TextBlock Text="{Binding CurrentItem.ItemSlot}"   
-                         Foreground="{StaticResource TextColour}"  
-                         VerticalAlignment="Center" HorizontalAlignment="Center"  
-                         FontSize="20"  
-                         FontFamily="{StaticResource TF2Font}"  
-                         Margin="0,10,0,0"
-						 Grid.Row="11" Grid.Column="1"/>
-
-                <TextBlock   
-                         Foreground="{StaticResource HeaderColour}"  
-                         VerticalAlignment="Center" HorizontalAlignment="Center"  
-                         FontSize="20"
-                         FontFamily="{StaticResource TF2Font}"
-                         Margin="0,60,0,10"
-						 Grid.Row="12" Grid.Column="1">
-                    CAPABILITIES
-                </TextBlock>
-
-                <ListView HorizontalAlignment="Center"  
-					      VerticalAlignment="Center"  
-                          Background="Transparent"  
-                          BorderBrush="Transparent"  
-                          Foreground="{StaticResource TextColour}"  
-                          FontFamily="{StaticResource TF2Font}"  
-                          IsHitTestVisible="False"
-						  Grid.Row="13" Grid.Column="1">
-
-                    <Grid Visibility="{Binding CurrentItem.Capabilities.CanBeGiftWrapped, Converter={StaticResource BoolToVisibility}}"
-                          Margin="0,0,0,5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Source="pack://Application:,,,/Resources/Symbols/Checkmark.png" 
-							   Width="35" Height="35"
-                               Grid.Column="0"/>
-
-                        <TextBlock Text="This item can be giftwrapped"  
-                                   Foreground="{StaticResource TextColour}" 
-                                   FontFamily="{StaticResource TF2Font}" 
-                                   VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                   FontSize="20" 
-                                   TextWrapping="Wrap"
-                                   Grid.Column="1"
-                                   Margin="20,0,0,0"/>
-                    </Grid>
-
-                    <Grid Visibility="{Binding CurrentItem.Capabilities.CanBeKillstreak, Converter={StaticResource BoolToVisibility}}"
-                          Margin="0,0,0,5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Source="pack://Application:,,,/Resources/Symbols/Checkmark.png" 
-							   Width="35" Height="35"
-                               Grid.Column="0"/>
-
-                        <TextBlock Text="This item can have a killstreak kit applied"  
-                                   Foreground="{StaticResource TextColour}" 
-                                   FontFamily="{StaticResource TF2Font}" 
-                                   VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                   FontSize="20" 
-                                   TextWrapping="Wrap"
-                                   Grid.Column="1"
-                                   Margin="20,0,0,0"/>
-                    </Grid>
-
-                    <Grid Visibility="{Binding CurrentItem.Capabilities.CanBeStrangefied, Converter={StaticResource BoolToVisibility}}"
-                          Margin="0,0,0,5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Source="pack://Application:,,,/Resources/Symbols/Checkmark.png" 
-							   Width="35" Height="35"
-                               Grid.Column="0"/>
-
-                        <TextBlock Text="This item can be strangefied"  
-                                   Foreground="{StaticResource TextColour}" 
-                                   FontFamily="{StaticResource TF2Font}" 
-                                   VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                   FontSize="20" 
-                                   TextWrapping="Wrap"
-                                   Grid.Column="1"
-                                   Margin="20,0,0,0"/>
-                    </Grid>
-
-                    <Grid Visibility="{Binding CurrentItem.Capabilities.Nameable, Converter={StaticResource BoolToVisibility}}"
-                          Margin="0,0,0,5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Source="pack://Application:,,,/Resources/Symbols/Checkmark.png" 
-							   Width="35" Height="35"
-                               Grid.Column="0"/>
-
-                        <TextBlock Text="This item can be renamed"  
-                                   Foreground="{StaticResource TextColour}" 
-                                   FontFamily="{StaticResource TF2Font}" 
-                                   VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                   FontSize="20" 
-                                   TextWrapping="Wrap"
-                                   Grid.Column="1"
-                                   Margin="20,0,0,0"/>
-                    </Grid>
-
-                    <Grid Visibility="{Binding CurrentItem.Capabilities.WillAttachCrafter, Converter={StaticResource BoolToVisibility}}"
-                          Margin="0,0,0,5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Source="pack://Application:,,,/Resources/Symbols/Checkmark.png" 
-							   Width="35" Height="35"
-                               Grid.Column="0"/>
-
-                        <TextBlock Text="This item will attach the crafter's name"  
-                                   Foreground="{StaticResource TextColour}" 
-                                   FontFamily="{StaticResource TF2Font}" 
-                                   VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                   FontSize="20" 
-                                   TextWrapping="Wrap"
-                                   Grid.Column="1"
-                                   Margin="20,0,0,0"/>
-                    </Grid>
-
-                </ListView>
             </Grid>
         </ScrollViewer>
     </Grid>
