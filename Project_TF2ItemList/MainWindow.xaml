@@ -30,8 +30,8 @@
                 FontSize="20"
                 Foreground="#F1EFED"
                 Background="#3C352E"
-                Command="{Binding SwitchPageCommand}">
-            INSPECT ITEM
+                Command="{Binding SwitchPageCommand}"
+                Content="{Binding SwitchPageButtonText}">
         </Button>
     </Grid>
 </Window>

@@ -24,6 +24,18 @@ namespace Project_TF2ItemList.ViewModel
                 OnPropertyChanged(nameof(CurrentPage));
             }
         }
+
+        private string _switchPageButtonText = "INSPECT ITEM";
+        public string SwitchPageButtonText
+        {
+            get { return _switchPageButtonText; }
+            set
+            {
+                _switchPageButtonText = value;
+                OnPropertyChanged(SwitchPageButtonText);
+            }
+        }
+
         public ItemOverview OverviewPage { get; private set; } = new ItemOverview();
         public ItemInspection InspectionPage { get; private set; } = new ItemInspection();
 
@@ -59,7 +71,7 @@ namespace Project_TF2ItemList.ViewModel
                 CurrentPage = InspectionPage;
 
                 // Set the button text
-                //CommandText = "GO BACK";
+                SwitchPageButtonText = "GO BACK";
             }
             else
             {
@@ -67,7 +79,7 @@ namespace Project_TF2ItemList.ViewModel
                 CurrentPage = OverviewPage;
 
                 // Set the button text
-                //CommandText = "SHOW DETAILS";
+                SwitchPageButtonText = "INSPECT ITEM";
             }
         }
 
