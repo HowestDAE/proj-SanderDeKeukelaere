@@ -60,7 +60,7 @@ namespace Project_TF2ItemList.ViewModel
             }
         }
 
-        private string _selectedClass;
+        private string _selectedClass = "<all classes>";
         public string SelectedClass
         {
             get { return _selectedClass; }
@@ -72,19 +72,19 @@ namespace Project_TF2ItemList.ViewModel
             }
         }
 
-        private string _selectedItemType;
+        private string _selectedItemType = "<all item types>";
         public string SelectedItemType
         {
             get { return _selectedItemType; }
             set
             {
                 _selectedItemType = value;
-                RefreshItemFiltering();
+                RefreshItemTypeFiltering();
                 OnPropertyChanged(nameof(SelectedItemType));
             }
         }
 
-        private string _selectedItemSlot;
+        private string _selectedItemSlot = "<all item slots>";
         public string SelectedItemSlot
         {
             get { return _selectedItemSlot; }
@@ -131,110 +131,142 @@ namespace Project_TF2ItemList.ViewModel
 
         private async void RefreshItemFiltering()
         {
-            Items = await ItemRepository.GetItems();
-            GetItemsByClass();
-            GetItemsByType();
-            GetItemsBySlot();
+            List<Item> itemsCopy = new List<Item>(await ItemRepository.GetItems());
+
+            if (!NeedsBigItemLibrary())
+            {
+                itemsCopy.RemoveRange(200, itemsCopy.Count() - 200);
+            }
+
+            GetItemsByClass(itemsCopy);
+            GetItemsBySlot(itemsCopy);
+
+            ReloadItemTypes(itemsCopy);
+            GetItemsByType(itemsCopy);
+
+            Items = itemsCopy;
+        }
+
+        private async void RefreshItemTypeFiltering()
+        {
+            List<Item> itemsCopy = new List<Item>(await ItemRepository.GetItems());
+
+            if (!NeedsBigItemLibrary())
+            {
+                itemsCopy.RemoveRange(200, itemsCopy.Count() - 200);
+            }
+
+            GetItemsByClass(itemsCopy);
+            GetItemsBySlot(itemsCopy);
+            GetItemsByType(itemsCopy);
+
+            Items = itemsCopy;
         }
 
         private async void LoadItemsAndClasses()
         {
-            Items = await ItemRepository.GetItems();
+            List<Item> itemsCopy = new List<Item>(await ItemRepository.GetItems());
+            itemsCopy.RemoveRange(200, itemsCopy.Count() - 200);
+            GetItemsByClass(itemsCopy);
+            Items = itemsCopy;
 
             // The classes only need to be set once (otherwise "all classes" will start to be added multiple times)
             if (Classes == null)
             {
-                List<string> classes = await ItemRepository.GetClasses();
+                List<string> classes = new List<string>(await ItemRepository.GetClasses());
 
                 // Add "all classes" to classes list
-                classes.Add("<all classes>");
-                SelectedClass = classes[classes.Count - 1];
+                classes.Add(SelectedClass);
 
                 Classes = classes;
             }
 
-            // Items with no classes assigned, should have all classes
-            List<string> classesWithoutAllFilter = new List<string>(Classes);
-            classesWithoutAllFilter.RemoveAt(classesWithoutAllFilter.Count - 1);
-            foreach (Item item in Items)
-            {
-                if (item.Classes != null && item.Classes.Count() > 0) continue;
-                if (item.ItemSlot == null) continue; // Item should be equipable
-
-                item.Classes = classesWithoutAllFilter;
-            }
-
-            List<string> itemTypes = await ItemRepository.GetItemTypes();
-            // Add "all classes" to itemtypes list
-            itemTypes.Add("<all item types>");
-            SelectedItemType = itemTypes[itemTypes.Count - 1];
-            ItemTypes = itemTypes;
-
+            ReloadItemTypes(Items, true);
 
             List<string> itemSlots = await ItemRepository.GetItemSlots();
             // Add "all classes" to itemslots list
-            itemSlots.Add("<all item slots>");
-            SelectedItemSlot = itemSlots[itemSlots.Count - 1];
+            itemSlots.Add(SelectedItemSlot);
             ItemSlots = itemSlots;
-
-            // Sort items
-            RefreshItemFiltering();
         }
 
-        private void GetItemsByClass()
+        private void ReloadItemTypes(List<Item> items, bool addSelectedItemType = false)
+        {
+            List<string> itemTypes = new List<string>();
+
+            foreach (Item item in items)
+            {
+                if (item.ItemType == null) continue;
+
+                if (!itemTypes.Contains(item.ItemType))
+                {
+                    itemTypes.Add(item.ItemType);
+                }
+            }
+
+            if (!addSelectedItemType)
+            {
+                if (!itemTypes.Contains(SelectedItemType)) SelectedItemType = "<all item types>";
+            }
+
+            // Add "all itemtypes" to itemtypes list
+            itemTypes.Add(SelectedItemType);
+
+            ItemTypes = itemTypes;
+        }
+
+        bool NeedsBigItemLibrary()
+        {
+            return !_selectedItemType.Equals("<all item types>") || (!_selectedItemSlot.Equals("<all item slots>") && !_selectedItemSlot.Equals("misc"));
+        }
+
+        private void GetItemsByClass(List<Item> items)
         {
             if (_selectedClass == null) return;
 
             if (!_selectedClass.Equals("<all classes>"))
             {
-                List<Item> items = new List<Item>();
-
-                foreach (Item item in _items)
+                for (int i = items.Count-1; i >= 0; --i)
                 {
+                    Item item = items[i];
+
                     if (item.Classes == null) continue;
 
-                    if (item.Classes.Contains(_selectedClass)) items.Add(item);
+                    if (!item.Classes.Contains(_selectedClass)) items.RemoveAt(i);
                 }
-
-                Items = items;
             }
         }
 
-        private void GetItemsByType()
+        private void GetItemsByType(List<Item> items)
         {
             if (_selectedItemType == null) return;
 
             if (!_selectedItemType.Equals("<all item types>"))
             {
-                List<Item> items = new List<Item>();
-
-                foreach (Item item in _items)
+                for (int i = items.Count-1; i >= 0; --i)
                 {
+                    Item item = items[i];
+
                     if (item.ItemType == null) continue;
 
-                    if (item.ItemType.Equals(_selectedItemType)) items.Add(item);
+                    if (!item.ItemType.Equals(_selectedItemType)) items.RemoveAt(i);
                 }
-
-                Items = items;
             }
         }
 
-        private void GetItemsBySlot()
+        private void GetItemsBySlot(List<Item> items)
         {
             if (_selectedItemSlot == null) return;
 
             if (!_selectedItemSlot.Equals("<all item slots>"))
             {
-                List<Item> items = new List<Item>();
-
-                foreach (Item item in _items)
+                for (int i = items.Count-1; i >= 0; --i)
                 {
+                    Item item = items[i];
+
                     if (item.ItemSlot == null) continue;
 
-                    if (item.ItemSlot.Equals(_selectedItemSlot)) items.Add(item);
+                    if (!item.ItemSlot.Equals(_selectedItemSlot)) items.RemoveAt(i);
                 }
-
-                Items = items;
             }
         }
 

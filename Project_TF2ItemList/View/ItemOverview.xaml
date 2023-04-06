@@ -79,7 +79,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Width="390" Height="260"
-                              Background="Transparent">
+                          Background="Transparent">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="10"/>
                             <RowDefinition/>

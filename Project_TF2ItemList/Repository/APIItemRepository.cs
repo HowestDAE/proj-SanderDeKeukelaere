@@ -75,8 +75,6 @@ namespace Project_TF2ItemList.Repository
                 }
             });
 
-            _items.RemoveRange(200, _items.Count() - 200);
-
             // Get all classes
             foreach (Item item in _items)
             {
@@ -92,6 +90,15 @@ namespace Project_TF2ItemList.Repository
                 }
 
                 if (_classes.Count() == 9) break;
+            }
+
+            // Items with no classes assigned, should have all classes
+            foreach (Item item in _items)
+            {
+                if (item.Classes != null && item.Classes.Count() > 0) continue;
+                if (item.ItemSlot == null) continue; // Item should be equipable
+
+                item.Classes = _classes;
             }
         }
 
