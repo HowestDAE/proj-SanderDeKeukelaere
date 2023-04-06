@@ -46,7 +46,7 @@ namespace Project_TF2ItemList.Repository
             if (_items == null) _items = new List<Item>();
 
             // Remove items without image
-            _items.RemoveAll(item => item.ImageUrl == null);
+            _items.RemoveAll(item => item.ImageUrl == null || item.ImageUrl.Length == 0);
 
             await Task.Run(() =>
             {
