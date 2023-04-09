@@ -16,7 +16,7 @@ namespace Project_TF2ItemList.Repository
         private List<string> _itemTypes = new List<string>();
         private List<string> _itemSlots = new List<string>();
 
-        public async Task<List<Item>> GetItems()
+        public async Task<List<Item>> GetItems(int page = 0)
         {
             // If item list already exists, return it
             if (_items != null) return _items;
@@ -152,6 +152,11 @@ namespace Project_TF2ItemList.Repository
             }
 
             return _itemSlots;
+        }
+
+        public bool HasReachedEnd()
+        {
+            return true;
         }
     }
 }

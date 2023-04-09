@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace Project_TF2ItemList.Repository
 {
@@ -17,9 +18,15 @@ namespace Project_TF2ItemList.Repository
         private List<string> _itemTypes = new List<string>();
         private List<string> _itemSlots = new List<string>();
 
+        private int _curPage = -1;
+
+        private List<int> _prevItemIndices = new List<int>();
+        private int _nextItemIdx = 1000;
+        private int _curItemIdx = 0;
+
         private async Task LoadItemsAndClassesAsync()
         {
-            string endpoint = "https://api.steampowered.com/IEconItems_440/GetSchemaItems/v1/?key=A905BA577D8E3D98AEA5C5F5CDF05AE9&language=en";
+            string endpoint = $"https://api.steampowered.com/IEconItems_440/GetSchemaItems/v1/?key=A905BA577D8E3D98AEA5C5F5CDF05AE9&language=en&start={_curItemIdx}";
 
             using (HttpClient client = new HttpClient())
             {
@@ -34,7 +41,15 @@ namespace Project_TF2ItemList.Repository
                     // read the result json string asynchronously
                     string json = await response.Content.ReadAsStringAsync();
 
-                    _items = JsonConvert.DeserializeObject<JObject>(json).SelectToken("result").SelectToken("items").ToObject<List<Item>>();
+                    JToken result = JsonConvert.DeserializeObject<JObject>(json).SelectToken("result");
+
+                    _items = result.SelectToken("items").ToObject<List<Item>>();
+
+                    JToken nextIdx = result.SelectToken("next");
+                    if(nextIdx != null)
+                    {
+                        _nextItemIdx = nextIdx.ToObject<int>();
+                    }
                 }
                 catch (Exception)
                 {
@@ -58,7 +73,7 @@ namespace Project_TF2ItemList.Repository
                     if (curItem.Classes == null) continue;
 
                     // Get all items with the same name as the current item
-                    List<Item> doubleItems = _items.FindAll(otherItem => otherItem != curItem && otherItem.ItemName.Equals(curItem.ItemName) && otherItem.ItemSlot.Equals(curItem.ItemSlot));
+                    List<Item> doubleItems = _items.FindAll(otherItem => otherItem != curItem && otherItem.ItemName.Equals(curItem.ItemName) && (otherItem.ItemSlot == null || curItem.ItemSlot == null || otherItem.ItemSlot.Equals(curItem.ItemSlot)));
 
                     foreach (Item doubleItem in doubleItems)
                     {
@@ -109,9 +124,26 @@ namespace Project_TF2ItemList.Repository
             return _classes;
         }
 
-        public async Task<List<Item>> GetItems()
+        public async Task<List<Item>> GetItems(int page)
         {
-            if (_items == null) await LoadItemsAndClassesAsync();
+            if (_curPage != page)
+            {
+                if(_curPage == -1)
+                {
+                    _curItemIdx = 0;
+                }
+                else
+                {
+                    if(page > 0 && _prevItemIndices.Count < page) _prevItemIndices.Add(_curItemIdx);
+                    _curItemIdx = page > _curPage ? _nextItemIdx : _prevItemIndices[page];
+                    // Make sure that next item idx is not the same as the current item idx
+                    ++_nextItemIdx;
+                }
+
+                _curPage = page;
+
+                await LoadItemsAndClassesAsync();
+            }
 
             return _items;
         }
@@ -168,6 +200,11 @@ namespace Project_TF2ItemList.Repository
             }
 
             return _itemSlots;
+        }
+
+        public bool HasReachedEnd()
+        {
+            return _curItemIdx == _nextItemIdx;
         }
     }
 }

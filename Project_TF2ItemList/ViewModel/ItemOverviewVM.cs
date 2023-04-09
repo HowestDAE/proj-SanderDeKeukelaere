@@ -12,9 +12,14 @@ namespace Project_TF2ItemList.ViewModel
 {
     public class ItemOverviewVM : ObservableObject
     {
+        int _pagesInApiCall = 5;
+        const int ITEMS_PER_OVERVIEW_PAGE = 200;
+
         static public IItemRepository ItemRepository { get; set; }
         private APIItemRepository _apiRepository = new APIItemRepository();
         private LocalItemRepository _localRepository = new LocalItemRepository();
+
+        private int _page = 0;
 
         private List<Item> _items;
         public List<Item> Items
@@ -67,7 +72,11 @@ namespace Project_TF2ItemList.ViewModel
             set
             {
                 _selectedClass = value;
-                RefreshItemFiltering();
+
+                // Refresh selected page and filtering
+                RefreshOverview();
+
+                // Update UI
                 OnPropertyChanged(nameof(SelectedClass));
             }
         }
@@ -79,7 +88,11 @@ namespace Project_TF2ItemList.ViewModel
             set
             {
                 _selectedItemType = value;
-                RefreshItemTypeFiltering();
+
+                // Refresh selected page and filtering
+                RefreshOverview(false);
+
+                // Update UI
                 OnPropertyChanged(nameof(SelectedItemType));
             }
         }
@@ -91,7 +104,11 @@ namespace Project_TF2ItemList.ViewModel
             set
             {
                 _selectedItemSlot = value;
-                RefreshItemFiltering();
+
+                // Refresh selected page and filtering
+                RefreshOverview();
+
+                // Update UI
                 OnPropertyChanged(nameof(SelectedItemSlot));
             }
         }
@@ -119,7 +136,10 @@ namespace Project_TF2ItemList.ViewModel
                 OnPropertyChanged(nameof(RepositoryButtonText));
             }
         }
+
         public RelayCommand SwitchRepositoryCommand { get; private set; }
+        public RelayCommand LoadPageLeftCommand { get; private set; }
+        public RelayCommand LoadPageRightCommand { get; private set; }
 
         public ItemOverviewVM()
         {
@@ -127,46 +147,96 @@ namespace Project_TF2ItemList.ViewModel
             LoadItemsAndClasses();
 
             SwitchRepositoryCommand = new RelayCommand(SwitchRepository);
+            LoadPageLeftCommand = new RelayCommand(LoadPageLeft, HasPageLeft);
+            LoadPageRightCommand = new RelayCommand(LoadPageRight, HasPageRight);
         }
 
-        private async void RefreshItemFiltering()
+        private void ResetPaging()
         {
-            List<Item> itemsCopy = new List<Item>(await ItemRepository.GetItems());
+            _page = 0;
 
+            LoadPageLeftCommand.NotifyCanExecuteChanged();
+            LoadPageRightCommand.NotifyCanExecuteChanged();
+        }
+
+        private void LoadPageLeft()
+        {
+            --_page;
+
+            RefreshOverview(false, false);
+
+            LoadPageLeftCommand.NotifyCanExecuteChanged();
+            LoadPageRightCommand.NotifyCanExecuteChanged();
+        }
+
+        private void LoadPageRight()
+        {
+            ++_page;
+
+            RefreshOverview(false, false);
+
+            LoadPageLeftCommand.NotifyCanExecuteChanged();
+            LoadPageRightCommand.NotifyCanExecuteChanged();
+        }
+
+        private bool HasPageLeft()
+        {
+            return _page > 0;
+        }
+
+        private bool HasPageRight()
+        {
+            return !ItemRepository.HasReachedEnd();
+        }
+
+        private async void RefreshOverview(bool reloadItemType = true, bool resetPaging = true)
+        {
+            // Reset paging to page 0
+            if(resetPaging) ResetPaging();
+
+            // Load the right page from the API
+            int apiPage = NeedsBigItemLibrary() ? _page : _page / _pagesInApiCall;
+            List<Item> itemsCopy = new List<Item>(await ItemRepository.GetItems(apiPage));
+
+            // Get the nr of pages in the current api call
+            _pagesInApiCall = itemsCopy.Count() / ITEMS_PER_OVERVIEW_PAGE;
+
+            // If the filtering does not need a big library (filtering for itemtype or itemslot)
             if (!NeedsBigItemLibrary())
             {
-                itemsCopy.RemoveRange(200, itemsCopy.Count() - 200);
+                // Calculate the current page
+                int overviewPage = _page - apiPage * _pagesInApiCall;
+
+                // Remove items from the list at the end
+                if (overviewPage < _pagesInApiCall - 1)
+                {
+                    int removeStartIdx = Math.Min(itemsCopy.Count() - 1, ITEMS_PER_OVERVIEW_PAGE * (overviewPage + 1));
+                    itemsCopy.RemoveRange(removeStartIdx, itemsCopy.Count() - removeStartIdx);
+                }
+
+                // Remove items from the list at the front
+                if (ITEMS_PER_OVERVIEW_PAGE * overviewPage > 0)
+                    itemsCopy.RemoveRange(0, ITEMS_PER_OVERVIEW_PAGE * overviewPage);
             }
 
+            // Filter by class and itemslot
             GetItemsByClass(itemsCopy);
             GetItemsBySlot(itemsCopy);
 
-            ReloadItemTypes(itemsCopy);
+            // Update the ItemType filter if needed
+            if(reloadItemType) ReloadItemTypes(itemsCopy);
+
+            // Filter by itemtype
             GetItemsByType(itemsCopy);
 
-            Items = itemsCopy;
-        }
-
-        private async void RefreshItemTypeFiltering()
-        {
-            List<Item> itemsCopy = new List<Item>(await ItemRepository.GetItems());
-
-            if (!NeedsBigItemLibrary())
-            {
-                itemsCopy.RemoveRange(200, itemsCopy.Count() - 200);
-            }
-
-            GetItemsByClass(itemsCopy);
-            GetItemsBySlot(itemsCopy);
-            GetItemsByType(itemsCopy);
-
+            // Set the items container
             Items = itemsCopy;
         }
 
         private async void LoadItemsAndClasses()
         {
-            List<Item> itemsCopy = new List<Item>(await ItemRepository.GetItems());
-            itemsCopy.RemoveRange(200, itemsCopy.Count() - 200);
+            List<Item> itemsCopy = new List<Item>(await ItemRepository.GetItems(0));
+            itemsCopy.RemoveRange(ITEMS_PER_OVERVIEW_PAGE, itemsCopy.Count() - ITEMS_PER_OVERVIEW_PAGE);
             GetItemsByClass(itemsCopy);
             Items = itemsCopy;
 
@@ -229,9 +299,7 @@ namespace Project_TF2ItemList.ViewModel
                 {
                     Item item = items[i];
 
-                    if (item.Classes == null) continue;
-
-                    if (!item.Classes.Contains(_selectedClass)) items.RemoveAt(i);
+                    if (item.ItemSlot == null || !item.Classes.Contains(_selectedClass)) items.RemoveAt(i);
                 }
             }
         }
@@ -248,7 +316,7 @@ namespace Project_TF2ItemList.ViewModel
 
                     if (item.ItemType == null) continue;
 
-                    if (!item.ItemType.Equals(_selectedItemType)) items.RemoveAt(i);
+                    if (item.ItemSlot == null || !item.ItemType.Equals(_selectedItemType)) items.RemoveAt(i);
                 }
             }
         }
@@ -263,9 +331,7 @@ namespace Project_TF2ItemList.ViewModel
                 {
                     Item item = items[i];
 
-                    if (item.ItemSlot == null) continue;
-
-                    if (!item.ItemSlot.Equals(_selectedItemSlot)) items.RemoveAt(i);
+                    if (item.ItemSlot == null || !item.ItemSlot.Equals(_selectedItemSlot)) items.RemoveAt(i);
                 }
             }
         }

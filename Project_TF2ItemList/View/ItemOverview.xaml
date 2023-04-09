@@ -66,74 +66,107 @@
                 Content="{Binding RepositoryButtonText}">
         </Button>
 
-        <ListBox Grid.Row="1" Grid.ColumnSpan="4"
-                 ItemsSource="{Binding Items}"
-                 Background="#282624"
-                 SelectedItem="{Binding SelectedItem}">
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ScrollContentPresenter}}}" Orientation="Horizontal"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
+        <Grid Grid.Row="1" Grid.ColumnSpan="4"
+              VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="80"/>
+            </Grid.ColumnDefinitions>
 
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid Width="390" Height="260"
-                          Background="Transparent">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition/>
-                            <RowDefinition Height="40"/>
-                            <RowDefinition Height="60"/>
-                        </Grid.RowDefinitions>
+            <Button Grid.Column="0"
+                    Background="#3C352E"
+                    Width="100" Height="80"
+                    HorizontalContentAlignment="Center"
+                    Command="{Binding LoadPageLeftCommand}">
+                <TextBlock Margin="0,0,20,0"
+                           FontFamily="{StaticResource TF2Font}"
+                           FontSize="25"
+                           Foreground="{StaticResource TextColour}"
+                           Text="&lt;"/>
+            </Button>
+            
+            <ListBox Grid.Column="1"
+                     ItemsSource="{Binding Items}"
+                     Background="#282624"
+                     SelectedItem="{Binding SelectedItem}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ScrollContentPresenter}}}" Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="30"/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="30"/>
-                        </Grid.ColumnDefinitions>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="390" Height="260"
+                              Background="Transparent">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="60"/>
+                            </Grid.RowDefinitions>
 
-                        <Rectangle Grid.RowSpan="4" Grid.ColumnSpan="3"
-                                   RadiusX="10" RadiusY="10"
-                                   Fill="#3C352E"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
 
-                        <Image Source="{Binding ItemQuality, Converter={StaticResource QualityToImage}}"
-                               Grid.Column="1" Grid.Row="1"/>
+                            <Rectangle Grid.RowSpan="4" Grid.ColumnSpan="3"
+                                       RadiusX="10" RadiusY="10"
+                                       Fill="#3C352E"/>
 
-                        <Image Source="{Binding ImageUrl}" Grid.Column="1" Grid.Row="1"/>
+                            <Image Source="{Binding ItemQuality, Converter={StaticResource QualityToImage}}"
+                                   Grid.Column="1" Grid.Row="1"/>
 
-                        <TextBlock Text="{Binding ItemName}" 
-                                   Foreground="{StaticResource TextColour}"
-                                   VerticalAlignment="Center" HorizontalAlignment="Center"
-                                   FontSize="20"
-                                   Grid.ColumnSpan="3" Grid.Row="2"
-                                   FontFamily="{StaticResource TF2Font}"
-                                   TextWrapping="Wrap"/>
+                            <Image Source="{Binding ImageUrl}" Grid.Column="1" Grid.Row="1"/>
 
-                        <ListView ItemsSource="{Binding Classes}"
-                                  Grid.ColumnSpan="3" Grid.Row="3"
-                                  HorizontalAlignment="Center"
-								  VerticalAlignment="Center"
-                                  Background="Transparent"
-                                  BorderBrush="Transparent"
-                                  IsHitTestVisible="False">
+                            <TextBlock Text="{Binding ItemName}" 
+                                       Foreground="{StaticResource TextColour}"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center"
+                                       FontSize="20"
+                                       Grid.ColumnSpan="3" Grid.Row="2"
+                                       FontFamily="{StaticResource TF2Font}"
+                                       TextWrapping="Wrap"/>
 
-                            <ListView.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-                            </ListView.ItemsPanel>
+                            <ListView ItemsSource="{Binding Classes}"
+                                      Grid.ColumnSpan="3" Grid.Row="3"
+                                      HorizontalAlignment="Center"
+								      VerticalAlignment="Center"
+                                      Background="Transparent"
+                                      BorderBrush="Transparent"
+                                      IsHitTestVisible="False">
 
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Image Source="{Binding Converter={StaticResource ClassToIcon}}"
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Converter={StaticResource ClassToIcon}}"
 										   Width="30" Height="30"/>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Button Grid.Column="2"
+                    Background="#3C352E"
+                    Width="100" Height="80"
+                    HorizontalContentAlignment="Center"
+                    Command="{Binding LoadPageRightCommand}">
+                <TextBlock Margin="0,0,20,0"
+                           FontFamily="{StaticResource TF2Font}"
+                           FontSize="25"
+                           Foreground="{StaticResource TextColour}"
+                           Text="&gt;"/>
+            </Button>
+        </Grid>
     </Grid>
 </Page>
