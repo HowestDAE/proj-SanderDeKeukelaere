@@ -20,6 +20,7 @@ namespace Project_TF2ItemList.ViewModel
         private LocalItemRepository _localRepository = new LocalItemRepository();
 
         private int _page = 0;
+        private bool _changingPage = false;
 
         private List<Item> _items;
         public List<Item> Items
@@ -90,7 +91,7 @@ namespace Project_TF2ItemList.ViewModel
                 _selectedItemType = value;
 
                 // Refresh selected page and filtering
-                RefreshOverview(false);
+                RefreshOverview(false, true, true);
 
                 // Update UI
                 OnPropertyChanged(nameof(SelectedItemType));
@@ -153,28 +154,45 @@ namespace Project_TF2ItemList.ViewModel
 
         private void ResetPaging()
         {
+            // Enable page changing
+            _changingPage = true;
+
+            // Reset page number
             _page = 0;
 
+            // Notify commands
             LoadPageLeftCommand.NotifyCanExecuteChanged();
             LoadPageRightCommand.NotifyCanExecuteChanged();
         }
 
         private void LoadPageLeft()
         {
+            // Enable page changing
+            _changingPage = true;
+
+            // Update page number
             --_page;
 
-            RefreshOverview(false, false);
+            // Update overview
+            RefreshOverview(true, false);
 
+            // Notify commands
             LoadPageLeftCommand.NotifyCanExecuteChanged();
             LoadPageRightCommand.NotifyCanExecuteChanged();
         }
 
         private void LoadPageRight()
         {
+            // Enable page changing
+            _changingPage = true;
+
+            // Update page number
             ++_page;
 
-            RefreshOverview(false, false);
+            // Update overview
+            RefreshOverview(true, false);
 
+            // Notify commands
             LoadPageLeftCommand.NotifyCanExecuteChanged();
             LoadPageRightCommand.NotifyCanExecuteChanged();
         }
@@ -189,8 +207,10 @@ namespace Project_TF2ItemList.ViewModel
             return !ItemRepository.HasReachedEnd();
         }
 
-        private async void RefreshOverview(bool reloadItemType = true, bool resetPaging = true)
+        private async void RefreshOverview(bool reloadItemType = true, bool resetPaging = true, bool filterItemType = false)
         {
+            if (_changingPage && filterItemType) return;
+
             // Reset paging to page 0
             if(resetPaging) ResetPaging();
 
@@ -231,6 +251,9 @@ namespace Project_TF2ItemList.ViewModel
 
             // Set the items container
             Items = itemsCopy;
+
+            // Reset page changing
+            _changingPage = false;
         }
 
         private async void LoadItemsAndClasses()
