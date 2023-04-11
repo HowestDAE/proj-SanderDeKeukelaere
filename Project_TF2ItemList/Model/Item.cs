@@ -108,13 +108,13 @@ namespace Project_TF2ItemList.Model
         public bool HasProperName { get; set; }             // Should the display name of this item start with "the"
 
         [JsonIgnore]
-        public string Level
+        public string Level                                 // The level of an item displayed as "minLevel-MaxLevel"
         {
             get { return MinimalLevel == MaximumLevel ? MinimalLevel.ToString() : $"{MinimalLevel}-{MaximumLevel}"; }
         }
 
         [JsonIgnore]
-        public string SubTitle
+        public string SubTitle                              // The level and itemtype combined in one string
         {
             get { return $"Level {Level} {ItemType}"; }
         }

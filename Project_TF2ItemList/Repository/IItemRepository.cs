@@ -11,9 +11,8 @@ namespace Project_TF2ItemList.Repository
     {
         Task<List<Item>> GetItems(int page);
         Task<List<string>> GetClasses();
-        Task<List<string>> GetItemTypes();
         Task<List<string>> GetItemSlots();
-        List<Item> GetItemsInSet(string itemSet);
+        Task<List<Item>> GetItemsInSet(string itemSet);
         bool HasReachedEnd();
     }
 }

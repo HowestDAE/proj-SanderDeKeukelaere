@@ -12,13 +12,13 @@ namespace Project_TF2ItemList.ViewModel
 {
     public class ItemOverviewVM : ObservableObject
     {
-        int _pagesInApiCall = 5;
-        const int ITEMS_PER_OVERVIEW_PAGE = 200;
-
-        static public IItemRepository ItemRepository { get; set; }
+        public static IItemRepository ItemRepository { get; set; }
         private APIItemRepository _apiRepository = new APIItemRepository();
         private LocalItemRepository _localRepository = new LocalItemRepository();
+        private bool _isRepositoryAPI = true;
 
+        private const int ITEMS_PER_OVERVIEW_PAGE = 200;
+        private int _pagesInApiCall = 5;
         private int _page = 0;
         private bool _changingPage = false;
 
@@ -125,8 +125,6 @@ namespace Project_TF2ItemList.ViewModel
             }
         }
 
-        private bool _isRepositoryAPI = true;
-
         private string _repositoryButtonText = "SWITCH TO OFFLINE REPOSITORY";
         public string RepositoryButtonText
         {
@@ -144,9 +142,13 @@ namespace Project_TF2ItemList.ViewModel
 
         public ItemOverviewVM()
         {
+            // Set the default repository
             ItemRepository = _apiRepository;
+
+            // Load items and classes
             LoadItemsAndClasses();
 
+            // Init all commands
             SwitchRepositoryCommand = new RelayCommand(SwitchRepository);
             LoadPageLeftCommand = new RelayCommand(LoadPageLeft, HasPageLeft);
             LoadPageRightCommand = new RelayCommand(LoadPageRight, HasPageRight);
@@ -209,13 +211,14 @@ namespace Project_TF2ItemList.ViewModel
 
         private async void RefreshOverview(bool reloadItemType = true, bool resetPaging = true, bool filterItemType = false)
         {
+            // If this function is called by itemtype filtering while changing the page number, do nothing
             if (_changingPage && filterItemType) return;
 
             // Reset paging to page 0
             if(resetPaging) ResetPaging();
 
             // Load the right page from the API
-            int apiPage = NeedsBigItemLibrary() ? _page : _page / _pagesInApiCall;
+            int apiPage = (NeedsBigItemLibrary() || _pagesInApiCall == 0) ? _page : _page / _pagesInApiCall;
             List<Item> itemsCopy = new List<Item>(await ItemRepository.GetItems(apiPage));
 
             // Get the nr of pages in the current api call
@@ -258,15 +261,25 @@ namespace Project_TF2ItemList.ViewModel
 
         private async void LoadItemsAndClasses()
         {
-            List<Item> itemsCopy = new List<Item>(await ItemRepository.GetItems(0));
-            itemsCopy.RemoveRange(ITEMS_PER_OVERVIEW_PAGE, itemsCopy.Count() - ITEMS_PER_OVERVIEW_PAGE);
+            // Reset paging
+            _page = 0;
+
+            // Get a copy of the items
+            List<Item> itemsCopy = new List<Item>(await ItemRepository.GetItems(_page));
+
+            // Only keep the first page
+            if(itemsCopy.Count > ITEMS_PER_OVERVIEW_PAGE) itemsCopy.RemoveRange(ITEMS_PER_OVERVIEW_PAGE, itemsCopy.Count() - ITEMS_PER_OVERVIEW_PAGE);
+
+            // Filter items by class
             GetItemsByClass(itemsCopy);
+
+            // Apply the items list
             Items = itemsCopy;
 
-            // The classes only need to be set once (otherwise "all classes" will start to be added multiple times)
+            // The classes only need to be set once
             if (Classes == null)
             {
-                List<string> classes = new List<string>(await ItemRepository.GetClasses());
+                List<string> classes = await ItemRepository.GetClasses();
 
                 // Add "all classes" to classes list
                 classes.Add(SelectedClass);
@@ -274,18 +287,27 @@ namespace Project_TF2ItemList.ViewModel
                 Classes = classes;
             }
 
+            // Load item types
             ReloadItemTypes(Items, true);
 
-            List<string> itemSlots = await ItemRepository.GetItemSlots();
-            // Add "all classes" to itemslots list
-            itemSlots.Add(SelectedItemSlot);
-            ItemSlots = itemSlots;
+            // The item slots only need to be set once
+            if (ItemSlots == null)
+            {
+                List<string> itemSlots = await ItemRepository.GetItemSlots();
+
+                // Add "all classes" to itemslots list
+                itemSlots.Add(SelectedItemSlot);
+
+                ItemSlots = itemSlots;
+            }
         }
 
         private void ReloadItemTypes(List<Item> items, bool addSelectedItemType = false)
         {
+            // Create a new list for the itemtypes
             List<string> itemTypes = new List<string>();
 
+            // Fill the list with all the itemtypes from the current list of items
             foreach (Item item in items)
             {
                 if (item.ItemType == null) continue;
@@ -296,72 +318,74 @@ namespace Project_TF2ItemList.ViewModel
                 }
             }
 
+            // Reset the selected itemtype if needed
             if (!addSelectedItemType)
             {
                 if (!itemTypes.Contains(SelectedItemType)) SelectedItemType = "<all item types>";
             }
 
-            // Add "all itemtypes" to itemtypes list
+            // Add the elsected item type to itemtypes list
             itemTypes.Add(SelectedItemType);
 
+            // Apply the new item types
             ItemTypes = itemTypes;
         }
 
         bool NeedsBigItemLibrary()
         {
+            // We need 1000 items instead of a smaller amount to show a good amount of items
+            //      when filtering for item type or item slot (except for filtering for itemslot misc)
             return !_selectedItemType.Equals("<all item types>") || (!_selectedItemSlot.Equals("<all item slots>") && !_selectedItemSlot.Equals("misc"));
         }
 
         private void GetItemsByClass(List<Item> items)
         {
-            if (_selectedClass == null) return;
+            // There is no filtering needed if there is no selected class
+            if (_selectedClass == null || _selectedClass.Equals("<all classes>")) return;
 
-            if (!_selectedClass.Equals("<all classes>"))
+            // Get all items that can be used by the selected class
+            for (int i = items.Count - 1; i >= 0; --i)
             {
-                for (int i = items.Count-1; i >= 0; --i)
-                {
-                    Item item = items[i];
+                Item item = items[i];
 
-                    if (item.ItemSlot == null || !item.Classes.Contains(_selectedClass)) items.RemoveAt(i);
-                }
+                if (item.ItemSlot == null || !item.Classes.Contains(_selectedClass)) items.RemoveAt(i);
             }
         }
 
         private void GetItemsByType(List<Item> items)
         {
-            if (_selectedItemType == null) return;
+            // There is no filtering needed if there is no selected item type
+            if (_selectedItemType == null || _selectedItemType.Equals("<all item types>")) return;
 
-            if (!_selectedItemType.Equals("<all item types>"))
+            // Get all items that is the selected item type
+            for (int i = items.Count - 1; i >= 0; --i)
             {
-                for (int i = items.Count-1; i >= 0; --i)
-                {
-                    Item item = items[i];
+                Item item = items[i];
 
-                    if (item.ItemType == null) continue;
-
-                    if (item.ItemSlot == null || !item.ItemType.Equals(_selectedItemType)) items.RemoveAt(i);
-                }
+                if (item.ItemSlot == null || !item.ItemType.Equals(_selectedItemType)) items.RemoveAt(i);
             }
         }
 
         private void GetItemsBySlot(List<Item> items)
         {
-            if (_selectedItemSlot == null) return;
+            // There is no filtering needed if there is no selected item slot
+            if (_selectedItemSlot == null || _selectedItemSlot.Equals("<all item slots>")) return;
 
-            if (!_selectedItemSlot.Equals("<all item slots>"))
+            // Get all items that is the selected item type
+            for (int i = items.Count - 1; i >= 0; --i)
             {
-                for (int i = items.Count-1; i >= 0; --i)
-                {
-                    Item item = items[i];
+                Item item = items[i];
 
-                    if (item.ItemSlot == null || !item.ItemSlot.Equals(_selectedItemSlot)) items.RemoveAt(i);
-                }
+                if (item.ItemSlot == null || !item.ItemSlot.Equals(_selectedItemSlot)) items.RemoveAt(i);
             }
         }
 
         private void SwitchRepository()
         {
+            // Toggle API repository
             _isRepositoryAPI = !_isRepositoryAPI;
+
+            // Set the corresponding repository
             if (_isRepositoryAPI)
             {
                 ItemRepository = _apiRepository;
@@ -370,7 +394,11 @@ namespace Project_TF2ItemList.ViewModel
             {
                 ItemRepository = _localRepository;
             }
+
+            // Set the button text
             RepositoryButtonText = _isRepositoryAPI ? "SWITCH TO OFFLINE REPOSITORY" : "SWITCH TO API REPOSITORY";
+
+            // Reload items from this repository
             LoadItemsAndClasses();
         }
     }

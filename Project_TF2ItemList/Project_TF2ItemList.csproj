@@ -130,7 +130,6 @@
   <ItemGroup>
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\ItemCapabilities.cs" />
-    <Compile Include="Model\ItemSchema.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

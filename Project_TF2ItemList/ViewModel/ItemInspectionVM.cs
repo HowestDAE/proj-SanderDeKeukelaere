@@ -17,11 +17,13 @@ namespace Project_TF2ItemList.ViewModel
             get { return _currentItem; }
             set
             {
+                // Do nothing if the item is set to the same value
                 if (_currentItem == value) return;
+
                 _currentItem = value;
 
-                if (_currentItem != null) ItemsInSet = ItemOverviewVM.ItemRepository.GetItemsInSet(_currentItem.ItemSet);
-                else ItemsInSet = new List<Item>();
+                // Get the current item set
+                GetItemSet();
 
                 OnPropertyChanged(nameof(CurrentItem));
             }
@@ -40,16 +42,27 @@ namespace Project_TF2ItemList.ViewModel
 
         public ItemInspectionVM()
         {
-            Item item = new Item();
-            item.ItemDescription = "Attack an enemy from behind to Backstab them for a one hit kill.";
-            item.ItemName = "Knife";
-            item.MaximumLevel = 1;
-            item.MinimalLevel = 1;
-            item.ItemQuality = 0;
-            item.ImageUrl = "http://media.steampowered.com/apps/440/icons/w_knife_large.22ba9afe5d2266d3d9af0f7dcf99d67d588cb895.png";
-            item.Classes = new List<string> { "Spy" };
-            item.Capabilities = new Capabilities { CanBeGiftWrapped = true, CanBeKillstreak = true, CanBeStrangefied = true, Nameable = true, WillAttachCrafter = true };
+            // Create a default item to display
+            Item item = new Item
+            {
+                ItemDescription = "Attack an enemy from behind to Backstab them for a one hit kill.",
+                ItemName = "Knife",
+                MaximumLevel = 1,
+                MinimalLevel = 1,
+                ItemQuality = 0,
+                ImageUrl = "http://media.steampowered.com/apps/440/icons/w_knife_large.22ba9afe5d2266d3d9af0f7dcf99d67d588cb895.png",
+                Classes = new List<string> { "Spy" },
+                Capabilities = new Capabilities { CanBeGiftWrapped = true, CanBeKillstreak = true, CanBeStrangefied = true, Nameable = true, WillAttachCrafter = true }
+            };
             _currentItem = item;
+        }
+
+        private async void GetItemSet()
+        {
+            if (_currentItem != null) 
+                ItemsInSet = await ItemOverviewVM.ItemRepository.GetItemsInSet(_currentItem.ItemSet);
+            else 
+                ItemsInSet = new List<Item>();
         }
     }
 }

@@ -43,10 +43,11 @@ namespace Project_TF2ItemList.ViewModel
 
         public MainWindowVM()
         {
+            // Set the initial page
             CurrentPage = OverviewPage;
 
+            // Initialize commands
             SwitchPageCommand = new RelayCommand(SwitchPage, CanSwitchPage);
-
             (OverviewPage.DataContext as ItemOverviewVM).PropertyChanged += ReloadSwitchPageButton;
         }
 

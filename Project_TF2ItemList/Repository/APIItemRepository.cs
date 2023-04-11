@@ -15,7 +15,6 @@ namespace Project_TF2ItemList.Repository
     {
         private List<Item> _items;
         private List<string> _classes = new List<string>();
-        private List<string> _itemTypes = new List<string>();
         private List<string> _itemSlots = new List<string>();
 
         private int _curPage = -1;
@@ -126,34 +125,44 @@ namespace Project_TF2ItemList.Repository
 
         public async Task<List<Item>> GetItems(int page)
         {
-            if (_curPage != page)
+            if (_curPage == page) return _items;
+
+            if (_curPage == -1)
             {
-                if(_curPage == -1)
-                {
-                    _curItemIdx = 0;
-                }
-                else
-                {
-                    if(page > 0 && _prevItemIndices.Count < page) _prevItemIndices.Add(_curItemIdx);
-                    _curItemIdx = page > _curPage ? _nextItemIdx : _prevItemIndices[page];
-                    // Make sure that next item idx is not the same as the current item idx
-                    ++_nextItemIdx;
-                }
-
-                _curPage = page;
-
-                await LoadItemsAndClassesAsync();
+                // This is the first time this function is called, so set the itemidx to 0
+                _curItemIdx = 0;
             }
+            else
+            {
+                // Add the current itemidx to the list of previous indices if needed
+                if (page > 0 && _prevItemIndices.Count < page) _prevItemIndices.Add(_curItemIdx);
+
+                // Set the current itemidx to the previous or next page
+                _curItemIdx = page > _curPage ? _nextItemIdx : _prevItemIndices[page];
+
+                // Make sure that next item idx is not the same as the current item idx
+                ++_nextItemIdx;
+            }
+
+            // Set the page number
+            _curPage = page;
+
+            // Reload items
+            await LoadItemsAndClassesAsync();
 
             return _items;
         }
 
-        public List<Item> GetItemsInSet(string itemSet)
+        public async Task<List<Item>> GetItemsInSet(string itemSet)
         {
+            if (_items == null) await LoadItemsAndClassesAsync();
+
             List<Item> items = new List<Item>();
 
+            // If no item set is given, return an empty list
             if (itemSet == null) return items;
 
+            // Fill the list with all the items that are in the given item set
             foreach (Item item in _items)
             {
                 if (item.ItemSet == null) continue;
@@ -164,31 +173,13 @@ namespace Project_TF2ItemList.Repository
             return items;
         }
 
-        public async Task<List<string>> GetItemTypes()
-        {
-            if(_items == null) await LoadItemsAndClassesAsync();
-
-            _itemTypes = new List<string>();
-
-            foreach(Item item in _items)
-            {
-                if(item.ItemType == null) continue;
-
-                if(!_itemTypes.Contains(item.ItemType))
-                {
-                    _itemTypes.Add(item.ItemType);
-                }
-            }
-
-            return _itemTypes;
-        }
-
         public async Task<List<string>> GetItemSlots()
         {
             if (_items == null) await LoadItemsAndClassesAsync();
 
             _itemSlots = new List<string>();
 
+            // Fill the list with all the item slots
             foreach (Item item in _items)
             {
                 if (item.ItemSlot == null) continue;
@@ -204,6 +195,7 @@ namespace Project_TF2ItemList.Repository
 
         public bool HasReachedEnd()
         {
+            // If the API has reached the end, it will return the same next item idx as the current item idx
             return _curItemIdx == _nextItemIdx;
         }
     }

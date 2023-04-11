@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Project_TF2ItemList.Model;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,6 @@ namespace Project_TF2ItemList.Repository
     {
         private List<Item> _items;
         private List<string> _classes = new List<string>();
-        private List<string> _itemTypes = new List<string>();
         private List<string> _itemSlots = new List<string>();
 
         public async Task<List<Item>> GetItems(int page = 0)
@@ -38,8 +38,10 @@ namespace Project_TF2ItemList.Repository
                         // Read all text in the resource
                         string json = reader.ReadToEnd();
 
-                        // Convert the json to a list of pokemons
-                        _items = JsonConvert.DeserializeObject<ItemSchema>(json).Items.ToList();
+                        // Convert the json to a list of items
+                        JToken result = JsonConvert.DeserializeObject<JObject>(json).SelectToken("result");
+
+                        _items = result.SelectToken("items").ToObject<List<Item>>();
                     }
                 }
 
@@ -47,26 +49,23 @@ namespace Project_TF2ItemList.Repository
                 if (_items == null) _items = new List<Item>();
 
                 // Remove doubles
-                for (int i = 0; i < _items.Count(); ++i)
+                for (int i = 0; i < _items.Count; ++i)
                 {
                     Item curItem = _items[i];
 
                     if (curItem.Classes == null) continue;
 
                     // Get all items with the same name as the current item
-                    List<Item> doubleItems = _items.FindAll(otherItem => otherItem != curItem && otherItem.ItemName.Equals(curItem.ItemName));
+                    List<Item> doubleItems = _items.FindAll(otherItem => otherItem != curItem && otherItem.ItemName.Equals(curItem.ItemName) && (otherItem.ItemSlot == null || curItem.ItemSlot == null || otherItem.ItemSlot.Equals(curItem.ItemSlot)));
 
                     foreach (Item doubleItem in doubleItems)
                     {
                         if (doubleItem.Classes == null) continue;
 
                         // Combine the classes list
-                        foreach (string className in doubleItem.Classes)
-                        {
-                            if (curItem.Classes.Contains(className)) continue;
-
-                            curItem.Classes.Add(className);
-                        }
+                        // Items with more then 1 class are doubles and need to be ignored
+                        if (doubleItem.Classes.Count == 1 && !curItem.Classes.Contains(doubleItem.Classes[0]))
+                            curItem.Classes.Add(doubleItem.Classes[0]);
 
                         // Remove the double from the itemlist
                         _items.Remove(doubleItem);
@@ -100,12 +99,16 @@ namespace Project_TF2ItemList.Repository
             return _classes;
         }
 
-        public List<Item> GetItemsInSet(string itemSet)
+        public async Task<List<Item>> GetItemsInSet(string itemSet)
         {
+            await GetItems();
+
             List<Item> items = new List<Item>();
 
+            // If no item set is given, return an empty list
             if (itemSet == null) return items;
 
+            // Fill the list with all the items that are in the given item set
             foreach (Item item in _items)
             {
                 if (item.ItemSet == null) continue;
@@ -116,39 +119,18 @@ namespace Project_TF2ItemList.Repository
             return items;
         }
 
-        public async Task<List<string>> GetItemTypes()
-        {
-            await GetItems();
-
-            _itemTypes = new List<string>();
-
-            foreach (Item item in _items)
-            {
-                if (item.ItemType == null) continue;
-
-                if (!_itemTypes.Contains(item.ItemType))
-                {
-                    _itemTypes.Add(item.ItemType);
-                }
-            }
-
-            return _itemTypes;
-        }
-
         public async Task<List<string>> GetItemSlots()
         {
             await GetItems();
 
             _itemSlots = new List<string>();
 
+            // Fill the list with all the item slots
             foreach (Item item in _items)
             {
                 if (item.ItemSlot == null) continue;
 
-                if (!_itemSlots.Contains(item.ItemSlot))
-                {
-                    _itemSlots.Add(item.ItemSlot);
-                }
+                if (!_itemSlots.Contains(item.ItemSlot)) _itemSlots.Add(item.ItemSlot);
             }
 
             return _itemSlots;
@@ -156,6 +138,7 @@ namespace Project_TF2ItemList.Repository
 
         public bool HasReachedEnd()
         {
+            // The local repository only has one page, so it has always reached the end of its data
             return true;
         }
     }

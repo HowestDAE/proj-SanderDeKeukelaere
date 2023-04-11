@@ -1,4 +1,5 @@
 {
+	"result": {
 		"status": 1,
 		"items_game_url": "http://media.steampowered.com/apps/440/scripts/items/items_game.3fa6d36611c15b3266179ae4c22ce4c8d58645ea.txt",
 		"items": [
@@ -33,7 +34,7 @@
 				"used_by_classes": [
 					"Scout"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_BOTTLE",
@@ -66,7 +67,7 @@
 				"used_by_classes": [
 					"Demoman"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_FIREAXE",
@@ -99,7 +100,7 @@
 				"used_by_classes": [
 					"Pyro"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_CLUB",
@@ -132,7 +133,7 @@
 				"used_by_classes": [
 					"Sniper"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_KNIFE",
@@ -166,7 +167,7 @@
 				"used_by_classes": [
 					"Spy"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_FISTS",
@@ -200,12 +201,11 @@
 					{
 						"name": "TF_UnknownStyle"
 					}
-				]
-				,
+				],
 				"used_by_classes": [
 					"Heavy"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_SHOVEL",
@@ -238,7 +238,7 @@
 				"used_by_classes": [
 					"Soldier"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_WRENCH",
@@ -271,8 +271,7 @@
 				},
 				"used_by_classes": [
 					"Engineer"
-				]
-				,
+				],
 				"attributes": [
 					{
 						"name": "kill eater score type",
@@ -285,7 +284,7 @@
 						"value": 0
 					}
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_BONESAW",
@@ -318,7 +317,7 @@
 				"used_by_classes": [
 					"Medic"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_SHOTGUN_PRIMARY",
@@ -351,7 +350,7 @@
 				"used_by_classes": [
 					"Engineer"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_SHOTGUN_SOLDIER",
@@ -384,7 +383,7 @@
 				"used_by_classes": [
 					"Soldier"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_SHOTGUN_HWG",
@@ -417,7 +416,7 @@
 				"used_by_classes": [
 					"Heavy"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_SHOTGUN_PYRO",
@@ -450,7 +449,7 @@
 				"used_by_classes": [
 					"Pyro"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_SCATTERGUN",
@@ -483,7 +482,7 @@
 				"used_by_classes": [
 					"Scout"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_SNIPERRIFLE",
@@ -516,7 +515,7 @@
 				"used_by_classes": [
 					"Sniper"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_MINIGUN",
@@ -549,7 +548,7 @@
 				"used_by_classes": [
 					"Heavy"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_SMG",
@@ -586,12 +585,11 @@
 					{
 						"name": "TF_UnknownStyle"
 					}
-				]
-				,
+				],
 				"used_by_classes": [
 					"Sniper"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_SYRINGEGUN_MEDIC",
@@ -624,7 +622,7 @@
 				"used_by_classes": [
 					"Medic"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_ROCKETLAUNCHER",
@@ -657,7 +655,7 @@
 				"used_by_classes": [
 					"Soldier"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_GRENADELAUNCHER",
@@ -690,7 +688,7 @@
 				"used_by_classes": [
 					"Demoman"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_PIPEBOMBLAUNCHER",
@@ -724,7 +722,7 @@
 				"used_by_classes": [
 					"Demoman"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_FLAMETHROWER",
@@ -758,7 +756,7 @@
 				"used_by_classes": [
 					"Pyro"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_PISTOL",
@@ -792,7 +790,7 @@
 					"Scout",
 					"Engineer"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_PISTOL_SCOUT",
@@ -826,7 +824,7 @@
 					"Scout",
 					"Engineer"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_REVOLVER",
@@ -859,7 +857,7 @@
 				"used_by_classes": [
 					"Spy"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_PDA_ENGINEER_BUILD",
@@ -891,8 +889,7 @@
 				},
 				"used_by_classes": [
 					"Engineer"
-				]
-				,
+				],
 				"attributes": [
 					{
 						"name": "kill eater score type",
@@ -910,7 +907,7 @@
 						"value": 60
 					}
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_PDA_ENGINEER_DESTROY",
@@ -942,7 +939,7 @@
 				"used_by_classes": [
 					"Engineer"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_PDA_SPY",
@@ -974,7 +971,7 @@
 				"used_by_classes": [
 					"Spy"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_BUILDER",
@@ -1006,7 +1003,7 @@
 				"used_by_classes": [
 					"Engineer"
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_MEDIGUN",
@@ -1038,8 +1035,7 @@
 				},
 				"used_by_classes": [
 					"Medic"
-				]
-				,
+				],
 				"attributes": [
 					{
 						"name": "kill eater score type",
@@ -1052,7 +1048,7 @@
 						"value": 2
 					}
 				]
-				
+
 			},
 			{
 				"name": "TF_WEAPON_INVIS",
@@ -1085,8 +1081,7 @@
 				},
 				"used_by_classes": [
 					"Spy"
-				]
-				,
+				],
 				"attributes": [
 					{
 						"name": "kill eater score type",
@@ -1094,8 +1089,9 @@
 						"value": 58
 					}
 				]
-				
+
 			}
 		],
 		"next": 0
+	}
 }
