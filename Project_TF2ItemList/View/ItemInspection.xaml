@@ -230,7 +230,7 @@
 
                     <TextBlock Grid.Column="0" Grid.Row="1"
                                Foreground="{StaticResource TextColour}"  
-                               Margin="0,75,0,0"
+                               Margin="0,65,0,0"
                                TextAlignment="Center"
                                FontSize="20"  
                                FontFamily="{StaticResource TF2Font}"
@@ -317,7 +317,7 @@
 
                     <TextBlock Grid.Column="1" Grid.Row="1"
                                Foreground="{StaticResource TextColour}"  
-                               Margin="0,75,0,0"
+                               Margin="0,65,0,0"
                                TextAlignment="Center"
                                FontSize="20"  
                                FontFamily="{StaticResource TF2Font}"
