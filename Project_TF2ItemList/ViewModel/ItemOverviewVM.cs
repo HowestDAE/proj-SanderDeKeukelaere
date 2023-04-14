@@ -279,7 +279,9 @@ namespace Project_TF2ItemList.ViewModel
             // The classes only need to be set once
             if (Classes == null)
             {
-                List<string> classes = await ItemRepository.GetClasses();
+                // make a copy of the classes (we don't want to add "all classes"
+                //  to items that have a reference to the classes list
+                List<string> classes = new List<string>(await ItemRepository.GetClasses());
 
                 // Add "all classes" to classes list
                 classes.Add(SelectedClass);
@@ -293,7 +295,9 @@ namespace Project_TF2ItemList.ViewModel
             // The item slots only need to be set once
             if (ItemSlots == null)
             {
-                List<string> itemSlots = await ItemRepository.GetItemSlots();
+                // make a copy of the item slots (we don't want to add "all items slots"
+                //  to items that have a reference to the item slots list
+                List<string> itemSlots = new List<string>(await ItemRepository.GetItemSlots());
 
                 // Add "all classes" to itemslots list
                 itemSlots.Add(SelectedItemSlot);
