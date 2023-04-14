@@ -28,6 +28,8 @@
         <convert:NullToVisibilityConverter x:Key="NullToVisibility"/>
         <convert:StringToVisibilityConverter x:Key="StringToVisibility"/>
         <convert:StringToVisibilityInvertedConverter x:Key="StringToVisibilityInverted"/>
+        <convert:ListToVisibilityConverter x:Key="ListToVisibility"/>
+        <convert:ListToVisibilityInvertedConverter x:Key="ListToVisibilityInverted"/>
     </Page.Resources>
 
     <Grid>
@@ -54,14 +56,12 @@
                     <RowDefinition/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
 
-                <ListView Grid.Row="0"
-                          Background="Transparent" BorderBrush="Transparent"
+                <StackPanel Grid.Row="0"
+                          Background="Transparent"
                           Margin="0,50,0,50"
-                          HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                           IsHitTestVisible="False">
                     <TextBlock Text="{Binding CurrentItem.ItemQuality, Converter={StaticResource QualityToName}}"  
                                Foreground="{Binding CurrentItem.ItemQuality, Converter={StaticResource QualityToHexColor}}" 
@@ -80,28 +80,22 @@
                                FontSize="20"  
                                FontFamily="{StaticResource TF2Font}"
                                Foreground="{StaticResource HeaderColour}"/>
-                </ListView>
+                </StackPanel>
 
-                <Grid Grid.Row="1"
-                      Background="Transparent"
-                      Margin="0,0,0,50"
-                      Visibility="{Binding CurrentItem.ItemSet, Converter={StaticResource StringToVisibility}}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+                <StackPanel Grid.Row="1"
+                            Background="Transparent"
+                            Margin="0,0,0,50"
+                            Visibility="{Binding CurrentItem.ItemSet, Converter={StaticResource StringToVisibility}}">
 
                     <TextBlock Foreground="#E4FB70" 
                                FontSize="20"  
                                FontFamily="{StaticResource TF2Font}" 
                                TextAlignment="Center"
-                               Text="{Binding CurrentItem.ItemSet}"
-							   Grid.Row="0"/>
+                               Text="{Binding CurrentItem.ItemSet}"/>
 
                     <ListBox ItemsSource="{Binding ItemsInSet}"
                              BorderBrush="Transparent"
-                             Background="Transparent"
-							 Grid.Row="1" 
+                             Background="Transparent" 
                              HorizontalAlignment="Center"
                              SelectedItem="{Binding CurrentItem}">
 
@@ -115,8 +109,8 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
-                </Grid>
-
+                </StackPanel>
+                
                 <TextBlock Grid.Row="1"
                            Foreground="#E4FB70" 
                            Margin="0,0,0,50"
@@ -127,28 +121,30 @@
                     This item is not part of a set
                 </TextBlock>
 
-                <TextBlock Grid.Row="2"
-                           Foreground="{StaticResource HeaderColour}"  
-                           Margin="0,0,0,5"
-                           TextAlignment="Center"
-                           Visibility="{Binding CurrentItem.ItemDescription, Converter={StaticResource StringToVisibility}}"  
-                           FontSize="20"  
-                           FontFamily="{StaticResource TF2Font}">
-                    DESCRIPTION
-                </TextBlock>
 
-                <TextBlock Grid.Row="3" 
-                           Foreground="{StaticResource TextColour}"
-                           Margin="0,0,0,50"  
-                           Width="700"
-                           TextAlignment="Center"
-                           Visibility="{Binding CurrentItem.ItemDescription, Converter={StaticResource StringToVisibility}}"  
-                           Text="{Binding CurrentItem.ItemDescription}"  
-                           FontSize="20"  
-                           FontFamily="{StaticResource TF2Font}"  
-                           TextWrapping="Wrap"/>
+                <StackPanel Grid.Row="2"
+                            Background="Transparent"
+                            Margin="0,0,0,50"
+                            Visibility="{Binding CurrentItem.ItemDescription, Converter={StaticResource StringToVisibility}}">
 
-                <Grid Grid.Row="4">
+                    <TextBlock Foreground="{StaticResource HeaderColour}"
+                               TextAlignment="Center"
+                               FontSize="20"  
+                               FontFamily="{StaticResource TF2Font}">
+                        DESCRIPTION
+                    </TextBlock>
+
+                    <TextBlock Foreground="{StaticResource TextColour}"
+                               Margin="0,5,0,0"  
+                               Width="700"
+                               TextAlignment="Center"
+                               Text="{Binding CurrentItem.ItemDescription}"  
+                               FontSize="20"  
+                               FontFamily="{StaticResource TF2Font}"  
+                               TextWrapping="Wrap"/>
+                </StackPanel>
+
+                <Grid Grid.Row="3">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -160,13 +156,14 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Column="0" Grid.Row="0">
+                    <Grid Grid.Column="0" Grid.Row="0"
+                          Visibility="{Binding CurrentItem.Classes, Converter={StaticResource ListToVisibility}}">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Row="0"
+                        <TextBlock Grid.Column="0" Grid.Row="0"
                                    Foreground="{StaticResource HeaderColour}"  
                                    Margin="0,0,0,0"
                                    TextAlignment="Center"
@@ -193,17 +190,26 @@
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <Image Source="{Binding Converter={StaticResource ClassToIcon}}"  
-							     Width="45" Height="45"/>
+							               Width="45" Height="45"/>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
                     </Grid>
 
-                    <ListView Grid.Column="0" Grid.Row="1"
-                              Background="Transparent" BorderBrush="Transparent"
-                              Margin="0,50,0,0"
-                              HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                              IsHitTestVisible="False">
+                    <TextBlock Grid.Column="0" Grid.Row="0"
+                               Foreground="{StaticResource TextColour}"  
+                               Margin="0,25,0,0"
+                               TextAlignment="Center"
+                               FontSize="20"  
+                               FontFamily="{StaticResource TF2Font}"
+                               Visibility="{Binding CurrentItem.ItemSlot, Converter={StaticResource ListToVisibilityInverted}}">
+                        Does not belong to a class
+                    </TextBlock>
+
+                    <StackPanel Grid.Column="0" Grid.Row="1"
+                                Background="Transparent"
+                                Margin="0,50,0,0"
+                                Visibility="{Binding CurrentItem.ItemSlot, Converter={StaticResource StringToVisibility}}">
 
                         <TextBlock Foreground="{StaticResource HeaderColour}"  
                                    Margin="0,0,0,0"
@@ -220,14 +226,22 @@
                                    FontSize="20"  
                                    FontFamily="{StaticResource TF2Font}">
                         </TextBlock>
-                    </ListView>
+                    </StackPanel>
 
-                    <ListView Grid.Column="0" Grid.Row="2"
-                              Background="Transparent" BorderBrush="Transparent"
-                              Margin="0,50,0,0"
-                              HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                              IsHitTestVisible="False"
-                              Visibility="{Binding CurrentItem.ItemPurpose, Converter={StaticResource NullToVisibility}}">
+                    <TextBlock Grid.Column="0" Grid.Row="1"
+                               Foreground="{StaticResource TextColour}"  
+                               Margin="0,75,0,0"
+                               TextAlignment="Center"
+                               FontSize="20"  
+                               FontFamily="{StaticResource TF2Font}"
+                               Visibility="{Binding CurrentItem.ItemSlot, Converter={StaticResource StringToVisibilityInverted}}">
+                        Can not be equiped
+                    </TextBlock>
+
+                    <StackPanel Grid.Column="0" Grid.Row="2"
+                                Background="Transparent"
+                                Margin="0,50,0,0"
+                                Visibility="{Binding CurrentItem.ItemPurpose, Converter={StaticResource NullToVisibility}}">
 
                         <TextBlock Foreground="{StaticResource HeaderColour}"  
                                    Margin="0,0,0,0"
@@ -244,15 +258,13 @@
                                    FontSize="20"  
                                    FontFamily="{StaticResource TF2Font}">
                         </TextBlock>
-                    </ListView>
+                    </StackPanel>
 
 
-                    <ListView Grid.Column="1" Grid.Row="0"
-                              Background="Transparent" BorderBrush="Transparent"
-                              Margin="0,0,0,0"
-                              HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                              IsHitTestVisible="False"
-                              Visibility="{Binding CurrentItem.CraftClass, Converter={StaticResource StringToVisibility}}">
+                    <StackPanel Grid.Column="1" Grid.Row="0"
+                                Background="Transparent"
+                                Margin="0,0,0,0"
+                                Visibility="{Binding CurrentItem.CraftClass, Converter={StaticResource StringToVisibility}}">
 
                         <TextBlock Foreground="{StaticResource HeaderColour}"  
                                    Margin="0,0,0,0"
@@ -269,7 +281,7 @@
                                    FontSize="20"  
                                    FontFamily="{StaticResource TF2Font}">
                         </TextBlock>
-                    </ListView>
+                    </StackPanel>
 
                     <TextBlock Grid.Column="1" Grid.Row="0"
                                Foreground="{StaticResource TextColour}"  
@@ -281,11 +293,9 @@
                         Can not be used in crafting
                     </TextBlock>
 
-                    <ListView Grid.Column="1" Grid.Row="1"
-                              Background="Transparent" BorderBrush="Transparent"
+                    <StackPanel Grid.Column="1" Grid.Row="1"
+                              Background="Transparent"
                               Margin="0,50,0,0"
-                              HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                              IsHitTestVisible="False"
                               Visibility="{Binding CurrentItem.HolidayRestriction, Converter={StaticResource StringToVisibility}}">
 
                         <TextBlock Foreground="{StaticResource HeaderColour}"  
@@ -303,7 +313,7 @@
                                    FontSize="20"  
                                    FontFamily="{StaticResource TF2Font}">
                         </TextBlock>
-                    </ListView>
+                    </StackPanel>
 
                     <TextBlock Grid.Column="1" Grid.Row="1"
                                Foreground="{StaticResource TextColour}"  
@@ -315,11 +325,9 @@
                         Does not have a holiday restriction
                     </TextBlock>
 
-                    <ListView Grid.Column="1" Grid.Row="2"
-                              Background="Transparent" BorderBrush="Transparent"
-                              Margin="0,50,0,0"
-                              HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
-                              IsHitTestVisible="False">
+                    <StackPanel Grid.Column="1" Grid.Row="2"
+                                Background="Transparent"
+                                Margin="0,50,0,0">
 
                         <TextBlock Foreground="{StaticResource HeaderColour}"  
                                    Margin="0,0,0,0"
@@ -441,7 +449,7 @@
                             </Grid>
 
                         </ListView>
-                    </ListView>
+                    </StackPanel>
 
                 </Grid>
                 
