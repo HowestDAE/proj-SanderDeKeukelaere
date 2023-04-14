@@ -202,7 +202,7 @@
                                TextAlignment="Center"
                                FontSize="20"  
                                FontFamily="{StaticResource TF2Font}"
-                               Visibility="{Binding CurrentItem.ItemSlot, Converter={StaticResource ListToVisibilityInverted}}">
+                               Visibility="{Binding CurrentItem.Classes, Converter={StaticResource ListToVisibilityInverted}}">
                         Does not belong to a class
                     </TextBlock>
 
