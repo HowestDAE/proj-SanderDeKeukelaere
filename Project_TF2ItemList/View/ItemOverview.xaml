@@ -18,9 +18,31 @@
     <Page.Resources>
         <FontFamily x:Key="TF2Font">pack://application:,,,/Resources/Fonts/#TF2 Build</FontFamily>
         <SolidColorBrush x:Key="TextColour" Color="#F1EFED"/>
+        <SolidColorBrush x:Key="OppositeColour" Color="#3C352E"/>
+        <SolidColorBrush x:Key="BackgroundColor" Color="#282624"/>
 
         <convert:ClassToIconConverter x:Key="ClassToIcon"/>
         <convert:QualityToImageConverter x:Key="QualityToImage"/>
+
+        <Style TargetType="ComboBox" x:Key="ComboboxStyle">
+            <Setter Property="Foreground" Value="{StaticResource ComboboxColour}"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="{StaticResource TF2Font}"/>
+        </Style>
+        
+        <Style TargetType="Button" x:Key="PagingButton">
+            <Setter Property="Background" Value="#3C352E"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="80"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="PagingText">
+            <Setter Property="Foreground" Value="{StaticResource TextColour}"/>
+            <Setter Property="Margin" Value="0,0,20,0"/>
+            <Setter Property="FontFamily" Value="{StaticResource TF2Font}"/>
+            <Setter Property="FontSize" Value="25"/>
+        </Style>
     </Page.Resources>
 
     <Grid>
@@ -36,36 +58,31 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
+        <!-- Filter combo boxes -->
         <ComboBox ItemsSource="{Binding Classes}" SelectedItem="{Binding SelectedClass}"
-                  FontFamily="{StaticResource TF2Font}"
-                  VerticalContentAlignment="Center"
-                  HorizontalContentAlignment="Center"
-                  Foreground="#3C352E"
+                  Style="{StaticResource ComboboxStyle}"
                   Grid.Row="0" Grid.Column="0"/>
 
         <ComboBox ItemsSource="{Binding ItemTypes}" SelectedItem="{Binding SelectedItemType}"
-                  FontFamily="{StaticResource TF2Font}"
-                  VerticalContentAlignment="Center"
-                  HorizontalContentAlignment="Center"
-                  Foreground="#3C352E"
+                  Style="{StaticResource ComboboxStyle}"
                   Grid.Row="0" Grid.Column="1"/>
 
         <ComboBox ItemsSource="{Binding ItemSlots}" SelectedItem="{Binding SelectedItemSlot}"
-                  FontFamily="{StaticResource TF2Font}"
-                  VerticalContentAlignment="Center"
-                  HorizontalContentAlignment="Center"
-                  Foreground="#3C352E"
+                  Style="{StaticResource ComboboxStyle}"
                   Grid.Row="0" Grid.Column="2"/>
 
+        <!-- Switch repository button -->
         <Button Grid.Row="0" Grid.Column="3" 
                 FontFamily="{StaticResource TF2Font}"
                 FontSize="15"
                 Foreground="{StaticResource TextColour}"
-                Background="#3C352E"
+                Background="{StaticResource OppositeColour}"
                 Command="{Binding SwitchRepositoryCommand}"
                 Content="{Binding RepositoryButtonText}">
         </Button>
 
+
+        <!-- Item list -->
         <Grid Grid.Row="1" Grid.ColumnSpan="4"
               VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
@@ -74,22 +91,28 @@
                 <ColumnDefinition Width="80"/>
             </Grid.ColumnDefinitions>
 
+            <!-- Page button left -->
             <Button Grid.Column="0"
-                    Background="#3C352E"
-                    Width="100" Height="80"
-                    HorizontalContentAlignment="Center"
+                    Style="{StaticResource PagingButton}"
                     Command="{Binding LoadPageLeftCommand}">
-                <TextBlock Margin="0,0,20,0"
-                           FontFamily="{StaticResource TF2Font}"
-                           FontSize="25"
-                           Foreground="{StaticResource TextColour}"
+                <TextBlock Style="{StaticResource PagingText}"
                            Text="&lt;"/>
             </Button>
-            
+
+            <!-- Page button right -->
+            <Button Grid.Column="2"
+                    Style="{StaticResource PagingButton}"
+                    Command="{Binding LoadPageRightCommand}">
+                <TextBlock Style="{StaticResource PagingText}"
+                           Text="&gt;"/>
+            </Button>
+
             <ListBox Grid.Column="1"
+                     Background="{StaticResource BackgroundColor}"
                      ItemsSource="{Binding Items}"
-                     Background="#282624"
                      SelectedItem="{Binding SelectedItem}">
+                
+                <!-- Allow horizontal listing of items -->
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ScrollContentPresenter}}}" Orientation="Horizontal"/>
@@ -98,8 +121,7 @@
 
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid Width="390" Height="260"
-                              Background="Transparent">
+                        <Grid Width="390" Height="260">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="10"/>
                                 <RowDefinition/>
@@ -113,41 +135,47 @@
                                 <ColumnDefinition Width="30"/>
                             </Grid.ColumnDefinitions>
 
+                            <!-- Background (rounded rectangle) -->
                             <Rectangle Grid.RowSpan="4" Grid.ColumnSpan="3"
                                        RadiusX="10" RadiusY="10"
-                                       Fill="#3C352E"/>
+                                       Fill="{StaticResource OppositeColour}"/>
 
-                            <Image Source="{Binding ItemQuality, Converter={StaticResource QualityToImage}}"
-                                   Grid.Column="1" Grid.Row="1"/>
+                            <!-- Item quality border image -->
+                            <Image Grid.Column="1" Grid.Row="1"
+                                   Source="{Binding ItemQuality, Converter={StaticResource QualityToImage}}"/>
 
+                            <!-- Item image -->
                             <Image Source="{Binding ImageUrl}" Grid.Column="1" Grid.Row="1"/>
 
-                            <TextBlock Text="{Binding ItemName}" 
+                            <TextBlock Grid.ColumnSpan="3" Grid.Row="2"
+                                       Text="{Binding ItemName}" 
                                        Foreground="{StaticResource TextColour}"
-                                       VerticalAlignment="Center" HorizontalAlignment="Center"
                                        FontSize="20"
-                                       Grid.ColumnSpan="3" Grid.Row="2"
                                        FontFamily="{StaticResource TF2Font}"
-                                       TextWrapping="Wrap"/>
+                                       TextWrapping="Wrap"
+                                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                            <ListView ItemsSource="{Binding Classes}"
-                                      Grid.ColumnSpan="3" Grid.Row="3"
+                            <!-- List of classes -->
+                            <ListView Grid.ColumnSpan="3" Grid.Row="3"
+                                      ItemsSource="{Binding Classes}"
                                       HorizontalAlignment="Center"
 								      VerticalAlignment="Center"
                                       Background="Transparent"
                                       BorderBrush="Transparent"
                                       IsHitTestVisible="False">
 
+                                <!-- Horizontal listview -->
                                 <ListView.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel Orientation="Horizontal"/>
                                     </ItemsPanelTemplate>
                                 </ListView.ItemsPanel>
 
+                                <!-- Class image -->
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <Image Source="{Binding Converter={StaticResource ClassToIcon}}"
-										   Width="30" Height="30"/>
+										       Width="30" Height="30"/>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>
@@ -155,18 +183,6 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-
-            <Button Grid.Column="2"
-                    Background="#3C352E"
-                    Width="100" Height="80"
-                    HorizontalContentAlignment="Center"
-                    Command="{Binding LoadPageRightCommand}">
-                <TextBlock Margin="0,0,20,0"
-                           FontFamily="{StaticResource TF2Font}"
-                           FontSize="25"
-                           Foreground="{StaticResource TextColour}"
-                           Text="&gt;"/>
-            </Button>
         </Grid>
     </Grid>
 </Page>
