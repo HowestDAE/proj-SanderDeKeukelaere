@@ -32,7 +32,7 @@ namespace Project_TF2ItemList.ViewModel
             set
             {
                 _switchPageButtonText = value;
-                OnPropertyChanged(SwitchPageButtonText);
+                OnPropertyChanged(nameof(SwitchPageButtonText));
             }
         }
 

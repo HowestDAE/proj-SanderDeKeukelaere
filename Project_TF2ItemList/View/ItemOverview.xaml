@@ -39,7 +39,6 @@
         </Style>
         <Style TargetType="TextBlock" x:Key="PagingText">
             <Setter Property="Foreground" Value="{StaticResource TextColour}"/>
-            <Setter Property="Margin" Value="0,0,20,0"/>
             <Setter Property="FontFamily" Value="{StaticResource TF2Font}"/>
             <Setter Property="FontSize" Value="25"/>
         </Style>
